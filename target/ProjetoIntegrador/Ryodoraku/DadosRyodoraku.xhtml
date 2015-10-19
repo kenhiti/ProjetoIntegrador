@@ -1,0 +1,53 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Ryodoraku</ui:define>
+	
+	<ui:define name="corpo">
+	
+	
+		<h:form>
+		
+			<h1>Inserir dados RYODORAKU</h1>
+						
+			<p:toolbar style="margin-top: 10 px">
+				<p:toolbarGroup>
+					<p:button value="Salvar" id="botaoSalvar" />
+					<p:button value="Limpar tabela" id="limparTabela" outcome="/Ryodoraku/DadosRyodoraku.xhtml"/>				
+				</p:toolbarGroup>
+					
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisar"/>
+				</p:toolbarGroup>
+			</p:toolbar>	
+			
+			<ui:include src="/WEB-INF/template/Ryodoraku/RyodorakuCorpo.xhtml"/>
+			
+			<p:tabView style="margin-top:20px">
+				<p:tab title="Lado Direito">
+					<ui:include src="/WEB-INF/template/Ryodoraku/LadoDireito.xhtml"/>
+				</p:tab>
+				
+				<p:tab title="Lado Esquerdo">
+					<ui:include src="/WEB-INF/template/Ryodoraku/LadoEsquerdo.xhtml"/>
+				</p:tab>
+			</p:tabView>
+			
+			<h1>Referências</h1>
+						
+				<ui:include src="/WEB-INF/template/Ryodoraku/Referencias.xhtml"/>			
+			
+			<p:confirmDialog header="Exclusao de Usuário" message="Tem certeza que deseja excluir este usuário?"
+							widgetVar="exclusaoUsuario">
+				<p:commandButton value="Sim" oncomplete="exclusaoUsuario.hide();"/>
+				<p:button value="Não" onclick="exclusaoUsuario.hide(); return false;"/>
+			</p:confirmDialog>
+		 
+		</h:form>		
+	</ui:define>
+	
+</ui:composition>

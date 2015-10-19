@@ -1,0 +1,370 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Anamnese</ui:define>
+	
+	<ui:define name="content">
+		<div class="Container100 Responsive100">
+            <div class="ContainerIndent">
+            	 <div class="Card ShadowEffect">
+              
+					<f:metadata>
+						<f:viewParam name="dummy"/>		
+						<f:event listener="#{cadastroAnamneseBean.inicializar}" type="preRenderView"/>
+					</f:metadata>
+				
+					<h:form>
+						<div class="EmptyBox20"></div>
+						<h1 class="TexAlCenter">Ficha de Anamnese</h1>
+						<div class="EmptyBox20"></div>
+						
+						<p:messages autoUpdate="true" closable="true"/>
+						
+						<p:panelGrid columns="2">
+							<p:outputLabel value="Paciente" for="cliente" />
+							<p:selectOneMenu id="cliente" style="width:100px;" value="#{cadastroAnamneseBean.pessoaSelecionada}"  >
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems value="#{cadastroAnamneseBean.clientes}"
+									var="listaCliente" itemValue="#{listaCliente}"
+									itemLabel="#{listaCliente.nome}"  />
+							</p:selectOneMenu>
+					
+					
+							<p:outputLabel value="Profissional" for="profissional" />
+							<p:selectOneMenu id="profissional" style="width:100px;" value="#{cadastroAnamneseBean.profissionalSelecionado}" >
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems value="#{cadastroAnamneseBean.profissionais}"
+									var="listaProfissional" itemValue="#{listaProfissional}"
+									itemLabel="#{listaProfissional.nome}" />
+							</p:selectOneMenu>	
+						</p:panelGrid>
+					
+						
+						<p:tabView style="margin-top:20px" scrollable="true" >
+							
+							<p:tab title="Historico">
+								<p:panelGrid columns="2" style="width:100%" >
+	
+									<p:outputLabel value="Motivo da consulta" for="motivoConsulta" />
+									<p:inputText id="motivoConsulta" styleClass="Wid90" value="#{cadastroAnamneseBean.historico.motivoConsulta}" />
+									<p:outputLabel value="Antecendentes patológicos" for="antecendentesPatologicos" />
+									<p:inputText id="antecendentesPatologicos" styleClass="Wid90" value="#{cadastroAnamneseBean.historico.antecedentesPatologicos}"/>
+									<p:outputLabel value="Hábitos alimentares" for="habitosAlimentares" />
+									<p:inputText id="habitosAlimentares" styleClass="Wid90" value="#{cadastroAnamneseBean.historico.habitosAlimentares}" />
+									<p:outputLabel value="Desejos" for="desejos" />
+									<p:inputText id="desejos" styleClass="Wid90" value="#{cadastroAnamneseBean.historico.desejos}"/>
+									<p:outputLabel value="Aversões" for="aversoes" />
+									<p:inputText id="aversoes" styleClass="Wid90" value="#{cadastroAnamneseBean.historico.aversoes}"/> 
+											     
+									  
+								</p:panelGrid>
+							</p:tab>
+							
+							<p:tab title="Preferências">
+								<p:panelGrid columns="2" style="width:100%">
+	
+									<p:outputLabel value="Palatais:" for="palatais"/>
+									<p:selectOneMenu id="palatais" style="width:130px" value="#{cadastroAnamneseBean.preferencias.preferenciasPalatais}">
+										<f:selectItem itemLabel="Selecione"/>
+								    	<f:selectItem itemLabel="Doce(E/BP)" itemValue="Doce(E/BP)" />
+								    	<f:selectItem itemLabel="Ácido(VB/F)" itemValue="Ácido(VB/F)" />
+								    	<f:selectItem itemLabel="Salgado(B/R)" itemValue="Salgado(B/R)" />
+								    	<f:selectItem itemLabel="Amargo(ID/C)" itemValue="Amargo(ID/C)" />
+								    	<f:selectItem itemLabel="Picante(IG/P)" itemValue="Picante(IG/P)" />
+								   	</p:selectOneMenu>
+								   	
+								   	<p:outputLabel value="Climáticas:" for="climaticas"/>
+									<p:selectOneMenu id="climaticas" style="width:130px" value="#{cadastroAnamneseBean.preferencias.preferenciasClimaticas}">
+										<f:selectItem itemLabel="Selecione"/>										
+								    	<f:selectItem itemLabel="Outono(IG/P)" itemValue="Outono(IG/P)" />
+								    	<f:selectItem itemLabel="Primavera(VB/F)" itemValue="Primavera(VB/F)" />
+								    	<f:selectItem itemLabel="Inverno(B/R)" itemValue="Inverno(B/R)" />
+								    	<f:selectItem itemLabel="Verão(C/CS)" itemValue="Verão(C/CS)" />	    	
+								   	</p:selectOneMenu>
+								   	
+								   	<p:outputLabel value="Ambiente preferido:" for="ambientePreferido"/>
+									<p:selectOneMenu id="ambientePreferido" style="width:130px" value="#{cadastroAnamneseBean.preferencias.preferenciasAmbientais}">
+								    	<f:selectItem itemLabel="Selecione"/>
+								    	<f:selectItem itemLabel="Úmido(E/VB)" itemValue="Úmido(E/VB)" />
+								    	<f:selectItem itemLabel="Frio(B/R)" itemValue="Frio(B/R)" />
+								    	<f:selectItem itemLabel="Vento(VB/F)" itemValue="Vento(VB/F)" />
+								    	<f:selectItem itemLabel="Calor(C/CS)" itemValue="Calor(C/CS)" />
+								    	<f:selectItem itemLabel="Seco(IG/P)" itemValue="Seco(IG/P)" />
+								   	</p:selectOneMenu>
+								   	
+								   	<p:outputLabel value="Emoção mais frequente:" for="emocao"/>
+									<p:selectOneMenu id="emocao" style="width:130px" value="#{cadastroAnamneseBean.preferencias.preferenciasEmocao}">
+								    	<f:selectItem itemLabel="Selecione"/>
+								    	<f:selectItem itemLabel="Raiva(F/VB)" itemValue="Raiva(F/VB)" />
+								    	<f:selectItem itemLabel="Tristeza(IG/P)" itemValue="Tristeza(IG/P)" />
+								    	<f:selectItem itemLabel="Preocupação(BP/E)" itemValue="Preocupação(BP/E)" />
+								    	<f:selectItem itemLabel="Medo(R/B)" itemValue="Medo(R/B)" />
+								    	<f:selectItem itemLabel="Alegria(C/CS)" itemValue="Alegria(C/CS)" />
+								   	</p:selectOneMenu>		
+											  
+								</p:panelGrid>
+								
+								<div class="EmptyBox20"></div>
+								<h2 class="">Observações Gerais</h2>
+								<div class="EmptyBox20"></div>
+								<p:outputLabel/>
+								<p:inputTextarea rows="3" styleClass="Wid95" value="#{cadastroAnamneseBean.preferencias.observacoesGerais}"/>
+							</p:tab>
+							
+							<p:tab title="Problemas">				
+								<p:panelGrid columns="2" style="width:100%">
+	
+									<p:outputLabel value="Mais frequentes" for="maisFrequente"/>
+									<p:selectOneMenu id="maisFrequente" style="width:120px;" value="#{cadastroAnamneseBean.problemas.problemaFrequente}">
+								    	<f:selectItem itemLabel="Tendão(F/VB)" itemValue="Tendão(F/VB)" />
+								    	<f:selectItem itemLabel="Pele(P/IG)" itemValue="Pele(P/IG)"/>
+								    	<f:selectItem itemLabel="Vasos(C/CS)" itemValue="Vasos(C/CS)"/>
+								    	<f:selectItem itemLabel="Ossos(R/B)" itemValue="Ossos(R/B)"/>
+								    	<f:selectItem itemLabel="Músculos(E/BP)" itemValue="Músculos(E/BP)"/>
+								   	</p:selectOneMenu>
+								   	
+								   	<p:outputLabel value="Cor do rosto" for="corRosto"/>
+									<p:selectOneMenu id="corRosto" style="width:120px;" value="#{cadastroAnamneseBean.problemas.problemasCorRosto}">
+								    	<f:selectItem itemLabel="Vermelho(C/CS)" itemValue="Vermelho(C/CS)" />
+								    	<f:selectItem itemLabel="Amarelo(BP/E)" itemValue="Amarelo(BP/E)"/>
+								    	<f:selectItem itemLabel="Branco(P/IG)" itemValue="Branco(P/IG)"/>
+								    	<f:selectItem itemLabel="Preto(R/B)" itemValue="Preto(R/B)"/>	  
+								    	<f:selectItem itemLabel="Azul Esverdeado(F/VB)" itemValue="Azul Esverdeado(F/VB)"/>  	
+								   	</p:selectOneMenu>
+								   	
+								   	<p:outputLabel value="Transpiração" for="transpiracao" />
+									<p:inputText id="transpiracao"  value="#{cadastroAnamneseBean.problemas.transpiracao}"/>
+									
+									<p:outputLabel value="Local" for="local" />
+									<p:inputText id="local"   value="#{cadastroAnamneseBean.problemas.localTranspiracao}"/> 
+								</p:panelGrid>
+							</p:tab>
+															
+							<p:tab title="Exame Fisico">
+								<p:panelGrid columns="2" style="width:100%">
+	
+									<p:outputLabel value="Peso" for="peso" />
+									<p:inputText id="peso" value="#{cadastroAnamneseBean.exameFisico.peso}"/>
+									<p:outputLabel value="Altura" for="altura" />
+									<p:inputText id="altura"  value="#{cadastroAnamneseBean.exameFisico.altura}"/>		
+									<p:outputLabel value="FC" for="fc" />
+									<p:inputText id="fc"  value="#{cadastroAnamneseBean.exameFisico.FC}"/>
+									
+									<p:outputLabel value="PA" for="pa" />
+									<p:inputText id="pa"  value="#{cadastroAnamneseBean.exameFisico.PA}"/>
+									<p:outputLabel value="Voz" for="voz" />
+									<p:inputText id="voz"  value="#{cadastroAnamneseBean.exameFisico.voz}"/>
+									<p:outputLabel value="Olhos" for="olhos" />
+									<p:inputText id="olhos"  value="#{cadastroAnamneseBean.exameFisico.olhos}"/>		
+									
+									<p:outputLabel value="Fezes" for="fezes" />
+									<p:inputText id="fezes"  value="#{cadastroAnamneseBean.exameFisico.fezes}"/>
+									<p:outputLabel value="Urina" for="urina" />
+									<p:inputText id="urina"  value="#{cadastroAnamneseBean.exameFisico.urina}"/>		
+									<p:outputLabel value="Digestão" for="digestao" />
+									<p:inputText id="digestao"  value="#{cadastroAnamneseBean.exameFisico.digestao}"/>
+									
+									<p:outputLabel value="Sono" for="sono" />
+									<p:inputText id="sono"  value="#{cadastroAnamneseBean.exameFisico.sono}"/>
+									<p:outputLabel value="Menstruação" for="menstruacao" />
+									<p:inputText id="menstruacao"  value="#{cadastroAnamneseBean.exameFisico.menstruacao}"/>
+									<p:outputLabel value="Sistema Reprodutor" for="sistemaReprodutor" />
+									<p:inputText id="sistemaReprodutor"  value="#{cadastroAnamneseBean.exameFisico.sistemaReprodutor}"/>		
+									
+									<p:outputLabel value="Dentes" for="dentes" />
+									<p:inputText id="dentes"  value="#{cadastroAnamneseBean.exameFisico.dentes}"/>
+									<p:outputLabel value="Nariz/Garganta" for="narizGarganta" />
+									<p:inputText id="narizGarganta"  value="#{cadastroAnamneseBean.exameFisico.narizGarganta}"/>		
+									<p:outputLabel value="Postura" for="postura" />
+									<p:inputText id="postura"  value="#{cadastroAnamneseBean.exameFisico.postura}"/>			
+												
+								</p:panelGrid>	
+							</p:tab>
+							
+							<p:tab title="Tipologia">
+								<p:panelGrid columns="2" style="width:100%">
+	
+									<p:outputLabel value="Tipos" for="tipos"/>
+							        <p:selectOneMenu id="tipos" style="width:150px;" value="#{cadastroAnamneseBean.tipologia.morfologia}" >
+							            <f:selectItem itemLabel="Selecione" />
+							            <f:selectItem itemLabel="Ombros largos, cintura fina, tórax pouco desenvolvido" itemValue="Ombros largos, cintura fina, tórax pouco desenvolvido"/>
+							            <f:selectItem itemLabel="Abdômen expandido, quadril estreito" itemValue="Abdômen expandido, quadril estreito"/>
+							            <f:selectItem itemLabel="Tronco curto, pernas compridas" itemValue="Tronco curto, pernas compridas"/>
+							            <f:selectItem itemLabel="Morfologia proporcional, estatura mediana." itemValue="Morfologia proporcional, estatura mediana"/>
+							        </p:selectOneMenu>  
+							        
+							        <p:outputLabel value="Corpo" for="corpo"/>
+							        <p:inputText id="corpo" value="#{cadastroAnamneseBean.tipologia.corpo}"/>
+									
+									<p:outputLabel value="Face" for="face"/>
+							        <p:inputText id="face"  value="#{cadastroAnamneseBean.tipologia.face}"/>
+									
+									<p:outputLabel value="Mãos" for="maos"/>
+							        <p:inputText id="maos"  value="#{cadastroAnamneseBean.tipologia.maos}"/>
+											  
+								</p:panelGrid>
+							</p:tab>
+							
+							<p:tab title="Pulsologia">
+								<div class="EmptyBox20"></div>
+								<h2>I</h2>
+								<div class="EmptyBox20"></div>  
+								
+								<p:panelGrid columns="2">								
+									<p:outputLabel value="Superficial IG" for="superficialIG" />
+									<p:inputText id="superficialIG" value="#{cadastroAnamneseBean.pulsologia.superficialIG_1}" />	
+									
+									<p:outputLabel value="Superficial ID" for="superficialID" />
+									<p:inputText id="superficialID" value="#{cadastroAnamneseBean.pulsologia.superficialID_1}" />	
+										
+									<p:outputLabel value="Profundo P" for="profundoP" />
+									<p:inputText id="profundoP" value="#{cadastroAnamneseBean.pulsologia.profundoP_1}"/>
+									
+									<p:outputLabel value="Profundo C" for="profundoC" />
+									<p:inputText id="profundoC" value="#{cadastroAnamneseBean.pulsologia.profundoC_1}"/>
+								</p:panelGrid>
+								
+								<div class="EmptyBox20"></div>
+								<h2>II</h2>
+								<div class="EmptyBox20"></div>  
+								<p:panelGrid columns="2">									
+									<p:outputLabel value="Superficial E" for="superficialE" />
+									<p:inputText id="superficialE" value="#{cadastroAnamneseBean.pulsologia.superficialE_2}"/>		
+									
+									<p:outputLabel value="Superficial VB" for="superficialVB" />
+									<p:inputText id="superficialVB" value="#{cadastroAnamneseBean.pulsologia.superficialVB_2}"/>		
+									
+									<p:outputLabel value="Profundo BP" for="profundoBP" />
+									<p:inputText id="profundoBP" value="#{cadastroAnamneseBean.pulsologia.profundoBP_2}"/>
+									
+									<p:outputLabel value="Profundo F" for="profundoF" />
+									<p:inputText id="profundoF" value="#{cadastroAnamneseBean.pulsologia.profundoF_2}"/>
+								</p:panelGrid>
+								
+								<div class="EmptyBox20"></div>
+								<h2>III</h2>
+								<div class="EmptyBox20"></div>  
+								<p:panelGrid columns="2">
+									<p:outputLabel value="Superficial TA" for="superficialTA" />
+									<p:inputText id="superficialTA" value="#{cadastroAnamneseBean.pulsologia.superficialTA_3}"/>	
+										
+									<p:outputLabel value="Superficial B" for="superficialB" />
+									<p:inputText id="superficialB" value="#{cadastroAnamneseBean.pulsologia.superficialB_3}"/>	
+										
+									<p:outputLabel value="Profundo CS" for="profundoCS" />
+									<p:inputText id="profundoCS" value="#{cadastroAnamneseBean.pulsologia.profundoCS_3}"/>
+									
+									<p:outputLabel value="Profundo R" for="profundoR" />
+									<p:inputText id="profundoR" value="#{cadastroAnamneseBean.pulsologia.profundoR_3}"/>															        
+								</p:panelGrid>		
+								
+								<div class="EmptyBox20"></div>
+								<h2>Língua</h2>
+								<div class="EmptyBox20"></div>  
+								<p:panelGrid columns="2" >
+									<p:outputLabel value="Cor" for="corLingua"/>
+									<p:inputText id="corLingua" value="#{cadastroAnamneseBean.pulsologia.cor}"/>
+									<p:outputLabel value="Aspecto" for="aspectoLingua"/>
+									<p:inputText id="aspectoLingua" value="#{cadastroAnamneseBean.pulsologia.aspecto}"/>
+								</p:panelGrid>  
+								
+								<div class="EmptyBox20"></div>
+								<h2>Local Afetado</h2>
+								<div class="EmptyBox20"></div>  
+										
+								<p:selectOneMenu id="localAfetado" value="#{cadastroAnamneseBean.pulsologia.localAfetado}">
+							    	<f:selectItem itemLabel="Aquecedor Inferior(R)" itemValue="Aquecedor Inferior(R)" />
+							    	<f:selectItem itemLabel="Aquecedor médio(B/E)" itemValue="Aquecedor médio(B/E)"/>
+							    	<f:selectItem itemLabel="Aquecedor Superior(P/C)" itemValue="Aquecedor Superior(P/C)"/>		    	
+						   		</p:selectOneMenu>
+							</p:tab>
+							
+							<p:tab title="Diagnóstico">
+								<p:panelGrid columns="2" style="width:100%">
+											
+									<p:outputLabel value="Meridiano Tendineo muscular afetado?"/>	
+									
+									<p:selectOneMenu value="#{cadastroAnamneseBean.diagnostico.meridiano}">
+										<f:selectItem itemLabel="Selecione"/>
+								    	<f:selectItem itemLabel="Sim" itemValue="SIM"/>
+								    	<f:selectItem itemLabel="Não" itemValue="NAO"/>		    	    	
+							   		</p:selectOneMenu>
+							   		
+							   		<p:outputLabel value="Qual?" for="qualMeridiano" />
+							   		<p:inputText id="qualMeridiano" size="18" value="#{cadastroAnamneseBean.diagnostico.qualMeridiano}"/>
+							   			
+							   		
+							   		<p:outputLabel value="Paciente(Pulso):" style="font-weight:bold"/>
+							   	 	<p:selectOneMenu value="#{cadastroAnamneseBean.diagnostico.pulso}">
+							   	 		<f:selectItem itemLabel="Selecione"/>
+								    	<f:selectItem itemLabel="Vazio" itemValue="VAZIO" />
+								    	<f:selectItem itemLabel="Plenitude" itemValue="PLENITUDE"/>		    	    	
+							   		</p:selectOneMenu>
+							   		
+							   		
+							   		<p:outputLabel value="Fatores internos afetados:" />
+							   	 	<p:selectOneMenu value="#{cadastroAnamneseBean.diagnostico.fatoresInternos}">
+							   	 		<f:selectItem itemLabel="Selecione"/>
+								    	<f:selectItem itemLabel="Vento" itemValue="VENTO" />
+								    	<f:selectItem itemLabel="Frio" itemValue="FRIO"/>		
+								    	<f:selectItem itemLabel="Calor" itemValue="CALOR"/>
+								    	<f:selectItem itemLabel="Umidade" itemValue="UMIDADE"/>
+								    	<f:selectItem itemLabel="Secura" itemValue="SECURA"/>		    	    	
+							   		</p:selectOneMenu>
+							   		
+							   		<p:outputLabel value="Local afetado:" />
+							   	 	<p:selectOneMenu value="#{cadastroAnamneseBean.diagnostico.localAfetado}">
+							   	 		<f:selectItem itemLabel="Selecione"/>
+								    	<f:selectItem itemLabel="Alto" itemValue="ALTO"/>
+								    	<f:selectItem itemLabel="Baixo" itemValue="BAIXO"/>		
+								    	<f:selectItem itemLabel="Frio" itemValue="FRIO"/>
+								    	<f:selectItem itemLabel="Calor" itemValue="CALOR"/>		    	    	
+							   		</p:selectOneMenu>   		
+							   		
+							   		<p:outputLabel value="Fatores externos afetados:" />
+							   	 	<p:selectOneMenu value="#{cadastroAnamneseBean.diagnostico.fatoresExternos}">
+							   	 		<f:selectItem itemLabel="Selecione"/>
+								    	<f:selectItem itemLabel="Vento" itemValue="VENTO"/>
+								    	<f:selectItem itemLabel="Frio" itemValue="FRIO"/>		
+								    	<f:selectItem itemLabel="Calor" itemValue="CALOR"/>
+								    	<f:selectItem itemLabel="Umidade" itemValue="UMIDADE"/>
+								    	<f:selectItem itemLabel="Secura" itemValue="SECURA"/>		    	    	
+							   		</p:selectOneMenu>
+							   		
+							   		<p:outputLabel value="Dupla de vasos maravilhosos:"/>
+							   	 	<p:selectOneMenu value="#{cadastroAnamneseBean.diagnostico.duplaVasos}">
+							   	 		<f:selectItem itemLabel="Selecione"/>
+								    	<f:selectItem itemLabel="TA5-VB41" itemValue="TA5-VB41"/>
+								    	<f:selectItem itemLabel="CS6-BP4" itemValue="CS6-BP4"/>		
+								    	<f:selectItem itemLabel="P7-R6" itemValue="P7-R6"/>
+								    	<f:selectItem itemLabel="ID3-B62" itemValue="ID3-B62"/>		    	    	
+							   		</p:selectOneMenu>
+							   		
+							   		<p:outputLabel value="Etiologia" for="etiologia"/>
+							   		<p:inputText id="etiologia" size="18" value="#{cadastroAnamneseBean.diagnostico.etiologia}" />			
+								</p:panelGrid>    							
+	
+							</p:tab>
+							
+							<p:tab title="Conclusão">
+								<p:inputTextarea  rows="15" styleClass="Wid95" value="#{cadastroAnamneseBean.anamnese.conclusao}"/>
+							</p:tab>				
+							
+						</p:tabView>
+						
+						<div class="EmptyBox30"></div>
+						<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroAnamneseBean.salvar}" update="@form"  styleClass="Container20 Responsive100" style="float:right;" />
+						<div class="EmptyBox20"></div>
+						
+					</h:form>
+					
+				</div>				
+			</div>
+		</div>			
+	</ui:define>
+	
+</ui:composition>

@@ -1,0 +1,51 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pr="http://primefaces.org/rio">
+
+    <div class="Animated05" id="layout-menu-cover">
+        <ul class="layout-menu">
+            <li>
+                <a class="menulink ripplelink">
+                    <i class="icon-round58 Fs40"></i>
+                    <span class="Fs18">Kenhiti Fujimoto<i class="icon-downwards Fright Fs20"></i><br /><span class="Fs12 FontRobotoLight">Analista Desenvolvedor</span></span>
+                </a>
+                <ul>
+                    <li><a href="#" class="menulink ripplelink"><i class="icon-planet29 Fs16"></i>Dashboard</a></li>                    
+                    <li><a href="#" class="menulink ripplelink"><i class="icon-change3 Fs16"></i> Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="Separator"></div>
+        <h:form>
+	        <pr:menu>	           
+	            <p:submenu id="rm_theme" label="Cadastrar" icon="icon-users">
+	                <p:menuitem id="rm_forms" value="Paciente" icon="icon-user" outcome="/Cliente/CadastroCliente"  />
+	                <p:menuitem id="rm_data" value="Usuário" icon="icon-user" outcome="/Cliente/CadastroUsuario" />
+	                <p:menuitem id="rm_datatable" value="Profissional" icon="icon-user" outcome="/Cliente/CadastroProfissional"/>
+	            </p:submenu>
+	            
+	            <p:submenu id="rm_default" label="Pesquisar" icon="icon-search">
+	                <p:menuitem  value="Pacientes" icon="icon-user" outcome="/Cliente/PesquisaCliente"/>
+	                <p:menuitem  value="Profissionais" icon="icon-user" outcome="/Cliente/PesquisaProfissional" />
+	                <p:menuitem  value="Usuários" icon="icon-user" outcome="/Cliente/PesquisaUsuario" />
+	                <p:menuitem  value="Anamneses" icon="icon-user" />
+	                <p:menuitem  value="Ryodoraku" icon="icon-user"/>
+	            </p:submenu>
+	           	            
+	            <p:menuitem  value="Anamnese" icon="icon-map102" outcome="/Anamnese/FichaAnamnese"/>
+	            
+	            <p:menuitem  value="Ryodoraku" icon="icon-photographic1" outcome="/Ryodoraku/DadosRyodoraku" />
+	            
+	            <p:menuitem  value="Relatórios" icon="icon-receipt9" />
+	            
+	            <p:menuitem  value="Ajuda" icon="icon-help19" />
+	            
+	            
+	        </pr:menu>
+		</h:form>
+    </div>	
+</ui:composition>

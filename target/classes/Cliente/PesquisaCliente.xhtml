@@ -1,0 +1,81 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de Paciente</ui:define>
+	
+	<ui:define name="content">
+		<div class="Container100">
+			<div class="ContainerIndent">
+				<div class="Card ShadowEffect TexAlCenter">
+					<h:form>
+					
+						<h1>Pesquisar Paciente</h1>
+						
+						<p:toolbar style="margin-top: 20 px">
+							<p:toolbarGroup>
+								<p:commandButton value="Pesquisar" action="#{pesquisaClienteBean.pesquisar}" update="@form"/>						
+							</p:toolbarGroup>
+								
+							<p:toolbarGroup align="right">
+								<p:button value="Novo" outcome="/Cliente/CadastroCliente"/>
+							</p:toolbarGroup>
+						</p:toolbar>
+						
+						<p:panelGrid columns="2" id="PainelPesquisa" style="margin-top: 15px" 
+						columnClasses="rotuloPesquisa, campo">
+						
+							<p:outputLabel value="Nome" for="nome"/>
+							<p:inputText id="nome" size="30" value="#{pesquisaClienteBean.filtro.nome}"/>
+							<p:outputLabel value="Telefone" for="telefone"/>
+							<p:inputMask id="telefone" mask="(99) 9999-9999" value="#{pesquisaClienteBean.filtro.telefone}"/>
+							<p:outputLabel value="Celular" for="celular"/>
+							<p:inputMask id="celular" mask="(99) 9999-9999" value="#{pesquisaClienteBean.filtro.celular}"/>			
+							
+						</p:panelGrid>
+						
+						<p:dataTable id="tabelaPacientes" value="#{pesquisaClienteBean.clientesFiltrados}" var="pacientes" style="margin-top: 20px" 
+						emptyMessage="Nenhum paciente encontrado" rows="5" paginator="true" 
+						paginatorAlwaysVisible="false" paginatorPosition="bottom">						
+							
+							<p:column headerText="Nome" style="text-align: center">
+								<h:outputText value="#{pacientes.nome}"/>
+							</p:column>
+							
+							<p:column headerText="Cidade" style="text-align: center" >
+								<h:outputText value="#{pacientes.endereco.cidade}"/>
+							</p:column>
+							<p:column headerText="UF" style="text-align: center; width:50px;">
+								<h:outputText value="#{pacientes.endereco.uf}"/>
+							</p:column>
+							<p:column headerText="Telefone"  style="text-align: center;width:100px;">
+								<h:outputText value="#{pacientes.telefone}"/>
+							</p:column>
+							<p:column headerText="Celular"  style="text-align: center;width:100px;">
+								<h:outputText value="#{pacientes.celular}"/>
+							</p:column>				
+							<p:column headerText="Ações" style="text-align: center; width:100px;">
+								<p:button icon="icon-pencil" title="Editar"/>
+								<p:commandButton icon="icon-trash" title="Excluir" oncomplete="exclusaoPaciente.show()"/>
+							</p:column>
+							
+						</p:dataTable>
+						
+						<p:spacer height="20px"/>
+						
+						<p:confirmDialog header="Exclusao de Pacientes" message="Tem certeza que deseja excluir este paciente?"
+										widgetVar="exclusaoPaciente">
+							<p:commandButton value="Sim" oncomplete="exclusaoPaciente.hide();"/>
+							<p:button value="Não" onclick="exclusaoPaciente.hide(); return false;"/>
+						</p:confirmDialog>				
+					</h:form>	
+				</div>
+			</div>
+		</div>
+					
+	</ui:define>
+	
+</ui:composition>

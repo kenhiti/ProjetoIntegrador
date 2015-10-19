@@ -1,0 +1,75 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Cadastro de Profissional</ui:define>
+	
+	<ui:define name="content">
+		<div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect">
+					<h:form>
+						<div class="EmptyBox20"></div>
+						<h1 class="TexAlCenter">Novo Profissional</h1>
+						<div class="EmptyBox20"></div>
+						
+						<p:messages autoUpdate="true" closable="true"/>				
+						
+						<p:panelGrid columns="4" id="PainelProfissional" style="width:100%" 
+						columnClasses="rotulo, campo, rotulo, campo">
+						
+							<p:outputLabel value="Nome" for="nomeProfissional" style="margin-top:20px" />
+							<p:inputText id="nomeProfissional" size="40" maxlength="50" value="#{cadastroProfissionalBean.profissional.nome}"/>
+							<p:outputLabel value="CPF" for="cpfProfissional"/>
+							<p:inputMask id="cpfProfissional" size="20" mask="999.999.999-99" value="#{cadastroProfissionalBean.profissional.documentoIdentificacao}"/>
+							
+							<p:outputLabel value="Sexo" for="sexoProfissional"/>
+							<p:selectOneRadio id="sexoProfissional" value="#{cadastroProfissionalBean.profissional.sexo}">
+								<f:selectItem itemLabel="Masculino" itemValue="MASCULINO"/>
+								<f:selectItem itemLabel="Feminino" itemValue="FEMININO"/>
+							</p:selectOneRadio>
+							<p:outputLabel value="Data de Nascimento" for="dataNascimentoProfissional"/>
+							<p:calendar id="dataNascimentoProfissional" pattern="dd/MM/yyyy" size="20"
+							navigator="true" pages="1" locale="pt" value="#{cadastroProfissionalBean.profissional.dataNascimento}"/>
+							
+							<p:outputLabel value="Endereço" for="enderecoProfissional"/>
+							<p:inputText id="enderecoProfissional" size="40" maxlength="50" value="#{cadastroProfissionalBean.endereco.logradouro}"/>
+							<p:outputLabel value="Numero" for="numeroProfissional"/>
+							<p:inputText id="numeroProfissional" size="20" maxlength="20" value="#{cadastroProfissionalBean.endereco.numero}" />
+							
+							<p:outputLabel value="Bairro" for="bairro"/>
+							<p:inputText id="bairro" size="40" maxlength="20" value="#{cadastroProfissionalBean.endereco.bairro}"/>			
+							<p:outputLabel value="Cidade" for="cidadeProfissional"/>
+							<p:inputText id="cidadeProfissional" size="40" maxlength="20" value="#{cadastroProfissionalBean.endereco.cidade}"/>
+							
+							<p:outputLabel value="Estado" for="estadoProfissional"/>
+							<p:inputText id="estadoProfissional" size="40" maxlength="20" value="#{cadastroProfissionalBean.endereco.uf}"/>			
+							<p:outputLabel value="CEP" for="cepProfissional"/>
+							<p:inputMask id="cepProfissional" mask="99999-999" value="#{cadastroProfissionalBean.endereco.cep}"/>
+							
+							<p:outputLabel value="Complemento" for="complemento"/>
+							<p:inputText id="complemento" size="40" maxlength="20" value="#{cadastroProfissionalBean.endereco.complemento}"/>			
+							<p:outputLabel value="Telefone" for="telefoneProfissional"/>
+							<p:inputMask id="telefoneProfissional" mask="(99) 9999-9999" value="#{cadastroProfissionalBean.profissional.telefone}"/>
+							
+							<p:outputLabel value="Celular" for="celularProfissional"/>
+							<p:inputMask id="celularProfissional" mask="(99) 9999-9999" value="#{cadastroProfissionalBean.profissional.celular}"/>
+							<p:outputLabel value="Email" for="emailProfissional"/>
+							<p:inputText id="emailProfissional" size="40" maxlength="50" value="#{cadastroProfissionalBean.profissional.email}"/>
+														
+						</p:panelGrid>
+						<div class="EmptyBox30"></div>
+						<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroProfissionalBean.salvar}"  update="@form" style="float:right; width:14em;"/>
+						<div class="EmptyBox20"></div>
+					</h:form>
+					
+					
+				</div>
+			</div>
+		</div>
+	</ui:define>
+	
+</ui:composition>

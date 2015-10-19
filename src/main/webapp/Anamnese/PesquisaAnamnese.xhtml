@@ -1,0 +1,93 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de Anamnese</ui:define>
+	
+	<ui:define name="content">
+		<div class="Container100">
+			<div class="ContainerIndent">
+				<div class="Card ShadowEffect TexAlCenter">
+					<h:form>
+						<div class="EmptyBox20"></div>
+						<h1>Pesquisar Anamnese</h1>
+						<div class="EmptyBox20"></div>
+						
+						<p:toolbar style="margin-top: 20 px">
+							<p:toolbarGroup>
+								<p:commandButton value="Pesquisar" action="#{pesquisaAnamneseBean.pesquisar}" update="@form"/>						
+							</p:toolbarGroup>
+								
+							<p:toolbarGroup align="right">
+								<p:button value="Novo" outcome="/Anamnese/FichaAnamnese"/>
+							</p:toolbarGroup>
+						</p:toolbar>
+						
+						<p:panelGrid columns="2" id="PainelPesquisa" style="margin-top: 15px" 
+						columnClasses="rotuloPesquisa, campo">
+						
+							<p:outputLabel value="Paciente" for="cliente" />
+							<p:selectOneMenu id="cliente"  value="#{pesquisaAnamneseBean.filtro.paciente}"  >
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems value="#{pesquisaAnamneseBean.pacientes}"
+									var="listaCliente" itemValue="#{listaCliente}"
+									itemLabel="#{listaCliente.nome}"  />
+							</p:selectOneMenu>
+							
+							<p:outputLabel value="Profissional" for="profissional"/>
+							<p:selectOneMenu id="profissional" value="#{pesquisaAnamneseBean.filtro.profissional}"  >
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems value="#{pesquisaAnamneseBean.profissionais}"
+									var="profissionais" itemValue="#{profissionais}"
+									itemLabel="#{profissionais.nome}"  />
+							</p:selectOneMenu>
+							
+							<p:outputLabel value="Data" for="data"/>
+							<p:calendar id="data" value="#{pesquisaClienteBean.filtro.telefone}" locale="pt" pattern="dd/MM/yyyy"/>
+						</p:panelGrid>
+						
+						<p:dataTable id="tabelaAnamnese" value="#{pesquisaClienteBean.clientesFiltrados}" var="pacientes" style="margin-top: 20px" 
+						emptyMessage="Nenhum paciente encontrado" rows="5" paginator="true" 
+						paginatorAlwaysVisible="false" paginatorPosition="bottom">						
+							
+							<p:column headerText="Nome" style="text-align: center">
+								<h:outputText value="#{pacientes.nome}"/>
+							</p:column>
+							
+							<p:column headerText="Cidade" style="text-align: center" >
+								<h:outputText value="#{pacientes.endereco.cidade}"/>
+							</p:column>
+							<p:column headerText="UF" style="text-align: center; width:50px;">
+								<h:outputText value="#{pacientes.endereco.uf}"/>
+							</p:column>
+							<p:column headerText="Telefone"  style="text-align: center;width:100px;">
+								<h:outputText value="#{pacientes.telefone}"/>
+							</p:column>
+							<p:column headerText="Celular"  style="text-align: center;width:100px;">
+								<h:outputText value="#{pacientes.celular}"/>
+							</p:column>				
+							<p:column headerText="Ações" style="text-align: center; width:100px;">
+								<p:button icon="icon-pencil" title="Editar"/>
+								<p:commandButton icon="icon-trash" title="Excluir" oncomplete="exclusaoPaciente.show()"/>
+							</p:column>
+							
+						</p:dataTable>
+						
+						<p:spacer height="20px"/>
+						
+						<p:confirmDialog header="Exclusao de Pacientes" message="Tem certeza que deseja excluir este paciente?"
+										widgetVar="exclusaoPaciente">
+							<p:commandButton value="Sim" oncomplete="exclusaoPaciente.hide();"/>
+							<p:button value="Não" onclick="exclusaoPaciente.hide(); return false;"/>
+						</p:confirmDialog>				
+					</h:form>	
+				</div>
+			</div>
+		</div>
+					
+	</ui:define>
+	
+</ui:composition>

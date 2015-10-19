@@ -1,0 +1,114 @@
+@charset "utf-8";
+
+body {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: normal;
+}
+
+header {
+	padding: 5px 0px;
+	height: 35px;
+	font-size: 30px;
+	font-style: italic;
+	font: arial;
+	background-color: #545454;
+	color: #fff;	
+	box-shadow: 0px 2px 2px #ccc;
+}
+
+header > div {
+	margin-left: 8px;
+	}
+
+#conteudo {
+	padding: 0px 8px;
+	margin: auto;
+}
+
+#Login{
+	
+	width: 290px;
+	margin: auto;
+	margin-top: 150px;
+	 
+}
+
+.rotulo {
+	width: 200px;
+	
+}
+
+.rotuloPesquisa {
+	width: 50px;
+	
+}
+
+.rotuloDiagnostico {
+	text-align: center;
+	width: 250px;
+	
+}
+
+.rotuloPulsologia {
+	text-align: center;
+	width: 10px;
+	
+}
+
+.campoPulsologia {
+	width: 90px
+}
+
+
+.campo2Puslsologia{
+	padding-left:10px;
+	width: 100px
+}
+
+.campo {
+	width: 100%;
+}
+
+.rotulo1 {
+	width: 110px;
+	
+}
+
+.ui-panelgrid tr {
+	border: none !important
+}
+
+.ui-panelgrid tr td {
+	border: none !important
+}
+
+
+footer {
+	
+	margin-bottom: 10px;	
+	width: 100%;
+	text-align: center;
+	font-style: oblique;
+	font-size:16px;
+}
+
+.ajax-status {
+	position: fixed !important;
+	top: 60px !important;
+	right: 10px;
+	width: 35px;
+	height: 35px
+	
+}
+
+.ui-dialog .ui-dialog-buttonpane{
+	text-align: center !important
+	
+} 
+
+.rotuloWid20{width:20%;}
+.campoWid20{width:30%;}
+
+
