@@ -5,23 +5,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.projetointegrador.projeto.model.Pessoa;
 import com.projetointegrador.projeto.model.Profissional;
-import com.projetointegrador.projeto.model.anamnese.Anamnese;
-import com.projetointegrador.projeto.repository.AnamneseRepository;
 import com.projetointegrador.projeto.repository.ClienteRepository;
 import com.projetointegrador.projeto.repository.ProfissionalRepository;
-import com.projetointegrador.projeto.repository.filter.AnamneseFilter;
+import com.projetointegrador.projeto.repository.RyodorakuRepository;
+import com.projetointegrador.projeto.repository.filter.RyodorakuFilter;
+import com.projetointegrador.projeto.ryororaku.Ryodoraku;
 
 @Named
-@ViewScoped
-public class PesquisaAnamneseBean implements Serializable{
+@SessionScoped
+public class PesquisaRyodorakuBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	private Ryodoraku ryodoraku;
+	private List<Ryodoraku> listaRyodoraku;
 	
 	private Pessoa pacienteSelecionado;
 	private List<Pessoa> pacientes;
@@ -29,10 +32,7 @@ public class PesquisaAnamneseBean implements Serializable{
 	private Profissional profissionalSelecionado;
 	private List<Profissional> profissionais;
 	
-	private AnamneseFilter filtro;
-	
-	private Anamnese anamnese;
-	private List<Anamnese> anamneses;
+	private RyodorakuFilter filtro;
 	
 	@Inject
 	private ClienteRepository clienteRepository;
@@ -41,7 +41,7 @@ public class PesquisaAnamneseBean implements Serializable{
 	private ProfissionalRepository ProfissionalRepository;
 	
 	@Inject 
-	private AnamneseRepository anamneseRepository;
+	private RyodorakuRepository ryoRepository;
 	
 	@PostConstruct
 	public void init(){
@@ -51,7 +51,7 @@ public class PesquisaAnamneseBean implements Serializable{
 		profissionalSelecionado = new Profissional();
 		profissionais = new ArrayList<Profissional>();
 		
-		filtro = new AnamneseFilter();
+		filtro = new RyodorakuFilter();
 		
 		buscarPacientes();
 		buscarProfissionais();
@@ -66,55 +66,64 @@ public class PesquisaAnamneseBean implements Serializable{
 	}
 	
 	public void pesquisar(){
-		this.anamneses = anamneseRepository.filtrados(filtro);
+		this.listaRyodoraku = ryoRepository.pesquisar(filtro); 
 	}
 	
 	
+	public Ryodoraku getRyodoraku() {
+		return ryodoraku;
+	}
+
+	public void setRyodoraku(Ryodoraku ryodoraku) {
+		this.ryodoraku = ryodoraku;
+	}
+
+	public List<Ryodoraku> getListaRyodoraku() {
+		return listaRyodoraku;
+	}
+
+	public void setListaRyodoraku(List<Ryodoraku> listaRyodoraku) {
+		this.listaRyodoraku = listaRyodoraku;
+	}
+
 	public Pessoa getPacienteSelecionado() {
 		return pacienteSelecionado;
 	}
+
 	public void setPacienteSelecionado(Pessoa pacienteSelecionado) {
 		this.pacienteSelecionado = pacienteSelecionado;
 	}
+
 	public List<Pessoa> getPacientes() {
 		return pacientes;
 	}
+
 	public void setPacientes(List<Pessoa> pacientes) {
 		this.pacientes = pacientes;
 	}
+
 	public Profissional getProfissionalSelecionado() {
 		return profissionalSelecionado;
 	}
+
 	public void setProfissionalSelecionado(Profissional profissionalSelecionado) {
 		this.profissionalSelecionado = profissionalSelecionado;
 	}
+
 	public List<Profissional> getProfissionais() {
 		return profissionais;
 	}
+
 	public void setProfissionais(List<Profissional> profissionais) {
 		this.profissionais = profissionais;
 	}
-	public AnamneseFilter getFiltro() {
+
+	public RyodorakuFilter getFiltro() {
 		return filtro;
 	}
-	public void setFiltro(AnamneseFilter filtro) {
+
+	public void setFiltro(RyodorakuFilter filtro) {
 		this.filtro = filtro;
-	}
-
-	public Anamnese getAnamnese() {
-		return anamnese;
-	}
-
-	public void setAnamnese(Anamnese anamnese) {
-		this.anamnese = anamnese;
-	}
-
-	public List<Anamnese> getAnamneses() {
-		return anamneses;
-	}
-
-	public void setAnamneses(List<Anamnese> anamneses) {
-		this.anamneses = anamneses;
 	}
 	
 }

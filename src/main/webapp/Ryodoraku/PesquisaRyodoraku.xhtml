@@ -1,0 +1,90 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa Ryodoraku</ui:define>
+	
+	<ui:define name="content">
+		<div class="Container100">
+			<div class="ContainerIndent">
+				<div class="Card ShadowEffect TexAlCenter">
+					<h:form>
+						<div class="EmptyBox20"></div>
+						<h1>Pesquisar dados ryodoraku</h1>
+						<div class="EmptyBox20"></div>
+						
+						<p:toolbar style="margin-top: 20 px">
+							<p:toolbarGroup>
+								<p:commandButton value="Pesquisar" action="#{pesquisaRyodorakuBean.pesquisar}" update="@form"/>						
+							</p:toolbarGroup>
+								
+							<p:toolbarGroup align="right">
+								<p:button value="Novo" outcome="/Ryodoraku/DadosRyodoraku"/>
+							</p:toolbarGroup>
+						</p:toolbar>
+						
+						<div class="EmptyBox20"></div>
+						<p:panelGrid columns="2" id="PainelPesquisa">
+						
+							<p:outputLabel value="Paciente" for="cliente" />
+							<p:selectOneMenu id="cliente" style="width:120px;" value="#{pesquisaRyodorakuBean.filtro.paciente}"  >
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems value="#{pesquisaRyodorakuBean.pacientes}"
+									var="listaCliente" itemValue="#{listaCliente.nome}"
+									itemLabel="#{listaCliente.nome}"  />
+							</p:selectOneMenu>
+							
+							<p:outputLabel value="Profissional" for="profissional"/>
+							<p:selectOneMenu id="profissional"  style="width:120px;" value="#{pesquisaRyodorakuBean.filtro.profissional}"  >
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems value="#{pesquisaRyodorakuBean.profissionais}"
+									var="profissionais" itemValue="#{profissionais.nome}"
+									itemLabel="#{profissionais.nome}"  />
+							</p:selectOneMenu>
+							
+							<p:outputLabel value="Data" for="data"/>
+							<p:calendar id="data" value="#{pesquisaRyodorakuBean.filtro.data}" locale="pt" pattern="dd/MM/yyyy"/>
+						</p:panelGrid>
+						
+						<p:dataTable id="tabelaRyodoraku" value="#{pesquisaRyodorakuBean.listaRyodoraku}" var="ryo" style="margin-top: 20px" 
+						emptyMessage="Nenhum dado encontrado" rows="5" paginator="true" 
+						paginatorAlwaysVisible="false" paginatorPosition="bottom" >						
+							
+							<p:column headerText="Data">
+								<h:outputText value="#{ryo.datahj}">
+									<f:convertDateTime pattern="dd/MM/yyyy"/>
+								</h:outputText>								
+							</p:column>
+							
+							<p:column headerText="Paciente">
+								<h:outputText value="#{ryo.cliente.nome}"/>
+							</p:column>
+							<p:column headerText="Profissional">
+								<h:outputText value="#{ryo.profissional.nome}"/>
+							</p:column>
+							
+							<p:column headerText="Ações" style="text-align: center; width:100px;">
+								<p:button icon="icon-pencil" title="Editar"/>
+								<p:commandButton icon="icon-trash" title="Excluir" oncomplete="exclusaoPaciente.show()"/>
+							</p:column>
+							
+						</p:dataTable>
+						
+						<p:spacer height="20px"/>
+						
+						<p:confirmDialog header="Exclusao de Pacientes" message="Tem certeza que deseja excluir este paciente?"
+										widgetVar="exclusaoPaciente">
+							<p:commandButton value="Sim" oncomplete="exclusaoPaciente.hide();"/>
+							<p:button value="Não" onclick="exclusaoPaciente.hide(); return false;"/>
+						</p:confirmDialog>				
+					</h:form>	
+				</div>
+			</div>
+		</div>
+					
+	</ui:define>
+	
+</ui:composition>

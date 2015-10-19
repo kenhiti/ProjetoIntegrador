@@ -26,49 +26,46 @@
 							</p:toolbarGroup>
 						</p:toolbar>
 						
-						<p:panelGrid columns="2" id="PainelPesquisa" style="margin-top: 15px" 
-						columnClasses="rotuloPesquisa, campo">
+						<div class="EmptyBox20"></div>
+						<p:panelGrid columns="2" id="PainelPesquisa">
 						
 							<p:outputLabel value="Paciente" for="cliente" />
-							<p:selectOneMenu id="cliente"  value="#{pesquisaAnamneseBean.filtro.paciente}"  >
+							<p:selectOneMenu id="cliente" style="width:120px;" value="#{pesquisaAnamneseBean.filtro.paciente}"  >
 								<f:selectItem itemLabel="Selecione" />
 								<f:selectItems value="#{pesquisaAnamneseBean.pacientes}"
-									var="listaCliente" itemValue="#{listaCliente}"
+									var="listaCliente" itemValue="#{listaCliente.nome}"
 									itemLabel="#{listaCliente.nome}"  />
 							</p:selectOneMenu>
 							
 							<p:outputLabel value="Profissional" for="profissional"/>
-							<p:selectOneMenu id="profissional" value="#{pesquisaAnamneseBean.filtro.profissional}"  >
+							<p:selectOneMenu id="profissional"  style="width:120px;" value="#{pesquisaAnamneseBean.filtro.profissional}"  >
 								<f:selectItem itemLabel="Selecione" />
 								<f:selectItems value="#{pesquisaAnamneseBean.profissionais}"
-									var="profissionais" itemValue="#{profissionais}"
+									var="profissionais" itemValue="#{profissionais.nome}"
 									itemLabel="#{profissionais.nome}"  />
 							</p:selectOneMenu>
 							
 							<p:outputLabel value="Data" for="data"/>
-							<p:calendar id="data" value="#{pesquisaClienteBean.filtro.telefone}" locale="pt" pattern="dd/MM/yyyy"/>
+							<p:calendar id="data" value="#{pesquisaAnamneseBean.filtro.data}" locale="pt" pattern="dd/MM/yyyy"/>
 						</p:panelGrid>
 						
-						<p:dataTable id="tabelaAnamnese" value="#{pesquisaClienteBean.clientesFiltrados}" var="pacientes" style="margin-top: 20px" 
-						emptyMessage="Nenhum paciente encontrado" rows="5" paginator="true" 
-						paginatorAlwaysVisible="false" paginatorPosition="bottom">						
+						<p:dataTable id="tabelaAnamnese" value="#{pesquisaAnamneseBean.anamneses}" var="anamnese" style="margin-top: 20px" 
+						emptyMessage="Nenhum ficha encontrada" rows="5" paginator="true" 
+						paginatorAlwaysVisible="false" paginatorPosition="bottom" >						
 							
-							<p:column headerText="Nome" style="text-align: center">
-								<h:outputText value="#{pacientes.nome}"/>
+							<p:column headerText="Data">
+								<h:outputText value="#{anamnese.dataCriacao}">
+									<f:convertDateTime pattern="dd/MM/yyyy"/>
+								</h:outputText>								
 							</p:column>
 							
-							<p:column headerText="Cidade" style="text-align: center" >
-								<h:outputText value="#{pacientes.endereco.cidade}"/>
+							<p:column headerText="Paciente">
+								<h:outputText value="#{anamnese.cliente.nome}"/>
 							</p:column>
-							<p:column headerText="UF" style="text-align: center; width:50px;">
-								<h:outputText value="#{pacientes.endereco.uf}"/>
+							<p:column headerText="Profissional">
+								<h:outputText value="#{anamnese.profissional.nome}"/>
 							</p:column>
-							<p:column headerText="Telefone"  style="text-align: center;width:100px;">
-								<h:outputText value="#{pacientes.telefone}"/>
-							</p:column>
-							<p:column headerText="Celular"  style="text-align: center;width:100px;">
-								<h:outputText value="#{pacientes.celular}"/>
-							</p:column>				
+							
 							<p:column headerText="Ações" style="text-align: center; width:100px;">
 								<p:button icon="icon-pencil" title="Editar"/>
 								<p:commandButton icon="icon-trash" title="Excluir" oncomplete="exclusaoPaciente.show()"/>

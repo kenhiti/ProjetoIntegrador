@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.projetointegrador.projeto.model.anamnese.Anamnese;
@@ -30,22 +29,23 @@ private static final long serialVersionUID = 1L;
 	@SuppressWarnings("unchecked")
 	public List<Anamnese> filtrados (AnamneseFilter filtro){
 		Session session = manager.unwrap(Session.class);
-		Criteria criteria = session.createCriteria(Anamnese.class);
+		Criteria criteria = session.createCriteria(Anamnese.class).createAlias("cliente", "c").createAlias("profissional", "p");
 		
 		if(filtro != null){
 			
-			if(StringUtils.isNotBlank (filtro.getPaciente().getNome())){
-				criteria.add(Restrictions.ilike("nome", filtro.getPaciente().getNome(), MatchMode.ANYWHERE));
+			if(StringUtils.isNotBlank (filtro.getPaciente())){
+				criteria.add(Restrictions.ilike("c.nome", filtro.getPaciente(), MatchMode.ANYWHERE));
 			}
-			if(StringUtils.isNotBlank(filtro.getPaciente().getTelefone())){
-				criteria.add(Restrictions.ilike("telefone", filtro.getPaciente().getTelefone(), MatchMode.ANYWHERE));
+			if(StringUtils.isNotBlank(filtro.getProfissional())){
+				criteria.add(Restrictions.ilike("p.nome", filtro.getProfissional(), MatchMode.ANYWHERE));
 			}
-			if(StringUtils.isNotBlank(filtro.getPaciente().getCelular())){
-				criteria.add(Restrictions.ilike("celular", filtro.getPaciente().getCelular(), MatchMode.ANYWHERE));
+			if(filtro.getData() != null){
+				criteria.add(Restrictions.ge("dataCriacao", filtro.getData()));
 			}
+			
 		}
 		
-		return criteria.addOrder(Order.asc("nome")).list();
+		return criteria.list();
 	}
 
 }

@@ -1,0 +1,50 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa Ryodoraku</ui:define>
+	
+	<ui:define name="content">
+		<div class="Container100">
+			<div class="ContainerIndent">
+				<div class="Card ShadowEffect TexAlCenter">
+					<h:form>
+						<div class="EmptyBox20"></div>
+						<h1>Gráfico de análise</h1>
+						<div class="EmptyBox20"></div>
+						
+						<p:toolbar style="margin-top: 20 px">
+							<p:toolbarGroup>
+								<p:button value="Pesquisar"/>						
+							</p:toolbarGroup>
+								
+							<p:toolbarGroup align="right">
+								<p:button value="Novo"/>
+							</p:toolbarGroup>
+						</p:toolbar>
+						<div class="EmptyBox20"></div>
+						
+						<p:panelGrid columns="2">
+							<p:outputLabel value="Data"/>
+							<p:outputLabel value="19/10/1984"/>
+							<p:outputLabel value="Paciente"/>
+							<p:outputLabel value="João da Silva"/>
+							<p:outputLabel value="Profissional"/>
+							<p:outputLabel value="Francisco Kenji Fujimoto"/>
+						</p:panelGrid>
+						
+						<div class="EmptyBox20"></div>						
+						<p:chart type="line" model="#{graficoRyodoraku.lineModel1}" style="height:300px;"/>
+ 						<div class="EmptyBox20"></div>
+						<p:chart type="line" model="#{graficoRyodoraku.lineModel2}" style="height:300px;"/>
+					</h:form>						
+				</div>
+			</div>
+		</div>
+					
+	</ui:define>
+	
+</ui:composition>
