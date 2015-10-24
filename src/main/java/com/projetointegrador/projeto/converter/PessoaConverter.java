@@ -36,7 +36,8 @@ public class PessoaConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value != null){
-			return ((Pessoa)value).getId().toString();
+			Pessoa pessoa = (Pessoa) value; 
+			return pessoa.getId() == null ? null : pessoa.getId().toString();
 		}
 		return "";
 	}

@@ -38,14 +38,25 @@ public class CadastroClienteBean implements Serializable {
 		this.cliente = cadastroClienteService.salvar(this.cliente);
 		limpar();
 		FacesUtil.addInfoMessage("Paciente salvo com sucesso!");
-	}		
+	}	
 	
+	public boolean isEditando() {
+		return this.cliente.getId() != null;
+	}
+
 	public Pessoa getCliente() {
 		return cliente;
+	}
+
+	public void setCliente(Pessoa cliente) {
+		this.cliente = cliente;
 	}
 
 	public Endereco getEndereco() {
 		return endereco;
 	}
 
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 }

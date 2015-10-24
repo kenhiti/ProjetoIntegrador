@@ -3,17 +3,23 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:o="http://omnifaces.org/ui">
 
-	<ui:define name="titulo">Cadastro de Paciente</ui:define>
+	<ui:define name="titulo">#{cadastroClienteBean.editando ? 'Edição do paciente' : 'Novo paciente'}</ui:define>
 	
 	<ui:define name="content">
 	  <div class="Container100">
             <div class="ContainerIndent">
                 <div class="Card ShadowEffect">
+                
+                	<f:metadata>
+						<o:viewParam name="cliente" value="#{cadastroClienteBean.cliente}"/>												
+					</f:metadata>
+					
 					<h:form>
 						<div class="EmptyBox20"></div>
-						<h1 class="TexAlCenter">Novo Paciente</h1>
+						<h1 class="TexAlCenter">#{cadastroClienteBean.editando ? 'Edição do paciente' : 'Novo paciente'}</h1>
 						<div class="EmptyBox20"></div>
 						<p:messages autoUpdate="true" closable="true"/>
 						

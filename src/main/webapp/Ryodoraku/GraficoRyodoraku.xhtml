@@ -18,28 +18,30 @@
 						
 						<p:toolbar style="margin-top: 20 px">
 							<p:toolbarGroup>
-								<p:button value="Pesquisar"/>						
+								<p:button value="Pesquisar" outcome="/Ryodoraku/PesquisaRyodoraku"/>						
 							</p:toolbarGroup>
 								
 							<p:toolbarGroup align="right">
-								<p:button value="Novo"/>
+								<p:button value="Novo" outcome="/Ryodoraku/DadosRyodoraku"/>
 							</p:toolbarGroup>
 						</p:toolbar>
 						<div class="EmptyBox20"></div>
 						
 						<p:panelGrid columns="2">
 							<p:outputLabel value="Data"/>
-							<p:outputLabel value="19/10/1984"/>
+							<p:outputLabel value="#{graficoRyodoraku.ryodoraku.datahj}">
+								<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+							</p:outputLabel>
 							<p:outputLabel value="Paciente"/>
-							<p:outputLabel value="João da Silva"/>
+							<p:outputLabel value="#{graficoRyodoraku.ryodoraku.cliente.nome}"/>
 							<p:outputLabel value="Profissional"/>
-							<p:outputLabel value="Francisco Kenji Fujimoto"/>
+							<p:outputLabel value="#{graficoRyodoraku.ryodoraku.profissional.nome}"/>
 						</p:panelGrid>
 						
 						<div class="EmptyBox20"></div>						
-						<p:chart type="line" model="#{graficoRyodoraku.lineModel1}" style="height:300px;"/>
+						<p:chart type="line" model="#{graficoRyodoraku.lineModel1}" style="height:300px;" responsive="true"/>
  						<div class="EmptyBox20"></div>
-						<p:chart type="line" model="#{graficoRyodoraku.lineModel2}" style="height:300px;"/>
+						
 					</h:form>						
 				</div>
 			</div>

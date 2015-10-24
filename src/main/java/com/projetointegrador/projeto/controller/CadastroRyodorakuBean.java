@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -35,6 +38,8 @@ public class CadastroRyodorakuBean implements Serializable {
 	private RyodorakuLadoDireito ryodorakuLadoDireito;
 	private RyodorakuLadoEsquerdo ryodorakuLadoEsquerdo;
 	
+	private Boolean controle;
+	
 	@Inject
 	private ClienteRepository clienteRepository;
 	
@@ -45,6 +50,7 @@ public class CadastroRyodorakuBean implements Serializable {
 	private CadastroRyodorakuService cadastroRyodorakuService;
 	
 	public CadastroRyodorakuBean(){
+		controle = true;
 		limpar();
 	}
 	
@@ -71,15 +77,38 @@ public class CadastroRyodorakuBean implements Serializable {
 		this.ryodoraku.setLimiteSuperior(calcularReferencia().add(new BigDecimal(10)));
 		this.ryodoraku.setLimiteInferior(calcularReferencia().subtract(new BigDecimal(10)));
 		this.ryodoraku = cadastroRyodorakuService.salvar(this.ryodoraku);
+		popularObjetoGrafico();
 		limpar();
 		FacesUtil.addInfoMessage("Paciente salvo com sucesso!");
+		controle = false;
+	}
+	
+	public void popularObjetoGrafico(){
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String,Object> sessionaMap = externalContext.getSessionMap();
+		sessionaMap.put("ryodoraku", this.ryodoraku);			
 	}
 	
 	private BigDecimal calcularReferencia(){
-		BigDecimal total = BigDecimal.ZERO;
-		
-		
-		return total;
+		Double total = calcularReferenciaDireito() + calcularReferenciaEsquerdo();
+		total = total / 2.0;		
+		return new BigDecimal(total);
+	}
+	
+	private Double calcularReferenciaDireito(){
+		Double soma = ryodorakuLadoDireito.getMediaLD_B65()+ryodorakuLadoDireito.getMediaLD_BP3()+ryodorakuLadoDireito.getMediaLD_C7()+
+				ryodorakuLadoDireito.getMediaLD_CS7()+ryodorakuLadoDireito.getMediaLD_E42()+ryodorakuLadoDireito.getMediaLD_F3()+
+				ryodorakuLadoDireito.getMediaLD_ID5()+ryodorakuLadoDireito.getMediaLD_IG5()+ryodorakuLadoDireito.getMediaLD_P9()+
+				ryodorakuLadoDireito.getMediaLD_R4()+ryodorakuLadoDireito.getMediaLD_TR4()+ryodorakuLadoDireito.getMediaLD_VB40();
+		return soma / 12.0;				
+	}
+	
+	private Double calcularReferenciaEsquerdo(){
+		Double soma = ryodorakuLadoEsquerdo.getMediaLE_B65()+ryodorakuLadoEsquerdo.getMediaLE_BP3()+ryodorakuLadoEsquerdo.getMediaLE_C7()+
+				ryodorakuLadoEsquerdo.getMediaLE_CS7()+ryodorakuLadoEsquerdo.getMediaLE_E42()+ryodorakuLadoEsquerdo.getMediaLE_F3()+
+				ryodorakuLadoEsquerdo.getMediaLE_ID5()+ryodorakuLadoEsquerdo.getMediaLE_IG5()+ryodorakuLadoEsquerdo.getMediaLE_P9()+
+				ryodorakuLadoEsquerdo.getMediaLE_R4()+ryodorakuLadoEsquerdo.getMediaLE_TR4()+ryodorakuLadoEsquerdo.getMediaLE_VB40();
+		return soma / 12.0;		
 	}
 	public Ryodoraku getRyodoraku() {
 		return ryodoraku;
@@ -116,5 +145,12 @@ public class CadastroRyodorakuBean implements Serializable {
 	public RyodorakuLadoEsquerdo getRyodorakuLadoEsquerdo() {
 		return ryodorakuLadoEsquerdo;
 	}
-	
+
+	public Boolean getControle() {
+		return controle;
+	}
+
+	public void setControle(Boolean controle) {
+		this.controle = controle;
+	}	
 }

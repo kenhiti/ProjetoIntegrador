@@ -33,7 +33,8 @@ public class ProfissionalConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value != null){
-			return ((Profissional)value).getId().toString();
+			Profissional profissional = (Profissional)value;
+			return profissional.getId() == null ? null : profissional.getId().toString();			
 		}
 		return "";
 	}

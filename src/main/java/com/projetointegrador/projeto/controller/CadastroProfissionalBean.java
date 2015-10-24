@@ -42,15 +42,25 @@ public class CadastroProfissionalBean implements Serializable {
 		this.profissional= cadastroProfissionalService.salvar(this.profissional);
 		limpar();
 		FacesUtil.addInfoMessage("Profissional salvo com sucesso!");
-	}		
+	}
 	
-
+	public boolean isEditando() {
+		return this.profissional.getId() != null;
+	}
+	
 	public Profissional getProfissional() {
 		return profissional;
+	}
+
+	public void setProfissional(Profissional profissional) {
+		this.profissional = profissional;
 	}
 
 	public Endereco getEndereco() {
 		return endereco;
 	}
-	
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}	
 }

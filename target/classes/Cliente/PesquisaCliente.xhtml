@@ -10,7 +10,8 @@
 	<ui:define name="content">
 		<div class="Container100">
 			<div class="ContainerIndent">
-				<div class="Card ShadowEffect TexAlCenter">
+				<div class="Card ShadowEffect TexAlCenter">				
+					
 					<h:form>
 						<div class="EmptyBox20"></div>
 						<h1>Pesquisar Paciente</h1>
@@ -57,8 +58,10 @@
 								<h:outputText value="#{pacientes.celular}"/>
 							</p:column>				
 							<p:column headerText="Ações" style="text-align: center; width:100px;">
-								<p:button icon="icon-pencil" title="Editar"/>
-								<p:commandButton icon="icon-trash" title="Excluir" oncomplete="exclusaoPaciente.show()"/>
+								<p:button icon="fa fa-pencil White" title="Editar" outcome="/Cliente/CadastroCliente">
+									<f:param name="cliente" value="#{pacientes.id}"/>
+								</p:button>
+								<p:commandButton icon="fa fa-remove White" title="Excluir" oncomplete="exclusaoPaciente.show()"/>
 							</p:column>
 							
 						</p:dataTable>

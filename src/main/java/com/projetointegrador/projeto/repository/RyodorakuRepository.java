@@ -22,6 +22,10 @@ public class RyodorakuRepository implements Serializable {
 	@Inject
 	private EntityManager manager;
 
+	public Ryodoraku buscarPorId(Long id){
+		return manager.find(Ryodoraku.class, id);
+	}
+	
 	public Ryodoraku atualizar(Ryodoraku ryodoraku) {
 		return manager.merge(ryodoraku);
 	}
