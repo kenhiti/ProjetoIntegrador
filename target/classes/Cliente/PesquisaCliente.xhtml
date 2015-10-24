@@ -12,9 +12,9 @@
 			<div class="ContainerIndent">
 				<div class="Card ShadowEffect TexAlCenter">
 					<h:form>
-					
+						<div class="EmptyBox20"></div>
 						<h1>Pesquisar Paciente</h1>
-						
+						<div class="EmptyBox20"></div>
 						<p:toolbar style="margin-top: 20 px">
 							<p:toolbarGroup>
 								<p:commandButton value="Pesquisar" action="#{pesquisaClienteBean.pesquisar}" update="@form"/>						
@@ -24,12 +24,11 @@
 								<p:button value="Novo" outcome="/Cliente/CadastroCliente"/>
 							</p:toolbarGroup>
 						</p:toolbar>
-						
-						<p:panelGrid columns="2" id="PainelPesquisa" style="margin-top: 15px" 
-						columnClasses="rotuloPesquisa, campo">
+						<div class="EmptyBox20"></div>
+						<p:panelGrid columns="2" id="PainelPesquisa">
 						
 							<p:outputLabel value="Nome" for="nome"/>
-							<p:inputText id="nome" size="30" value="#{pesquisaClienteBean.filtro.nome}"/>
+							<p:inputText id="nome" value="#{pesquisaClienteBean.filtro.nome}"/>
 							<p:outputLabel value="Telefone" for="telefone"/>
 							<p:inputMask id="telefone" mask="(99) 9999-9999" value="#{pesquisaClienteBean.filtro.telefone}"/>
 							<p:outputLabel value="Celular" for="celular"/>

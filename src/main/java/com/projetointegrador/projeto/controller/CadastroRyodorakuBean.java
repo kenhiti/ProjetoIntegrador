@@ -1,9 +1,11 @@
 package com.projetointegrador.projeto.controller;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -52,8 +54,8 @@ public class CadastroRyodorakuBean implements Serializable {
 		ryodorakuLadoEsquerdo = new RyodorakuLadoEsquerdo();
 	}
 	
+	@PostConstruct	
 	public void inicializar(){
-		
 		clientes = clienteRepository.buscarClientes();	
 		profissionais = profissionalRepository.buscarProfissional();
 		
@@ -65,11 +67,20 @@ public class CadastroRyodorakuBean implements Serializable {
 		this.ryodoraku.setDatahj(new Date());
 		this.ryodoraku.setCliente(pessoaSelecionada);
 		this.ryodoraku.setProfissional(profissionalSelecionado);
+		this.ryodoraku.setReferenciaGrafico(calcularReferencia());
+		this.ryodoraku.setLimiteSuperior(calcularReferencia().add(new BigDecimal(10)));
+		this.ryodoraku.setLimiteInferior(calcularReferencia().subtract(new BigDecimal(10)));
 		this.ryodoraku = cadastroRyodorakuService.salvar(this.ryodoraku);
 		limpar();
 		FacesUtil.addInfoMessage("Paciente salvo com sucesso!");
 	}
 	
+	private BigDecimal calcularReferencia(){
+		BigDecimal total = BigDecimal.ZERO;
+		
+		
+		return total;
+	}
 	public Ryodoraku getRyodoraku() {
 		return ryodoraku;
 	}

@@ -1,4 +1,4 @@
-<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+<ui:composition template="/WEB-INF/template.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -7,62 +7,68 @@
 
 	<ui:define name="titulo">Pesquisa de Usuário</ui:define>
 	
-	<ui:define name="corpo">
-		<h:form>
-		
-			<h1>Pesquisar Usuário</h1>
-			
-			<p:toolbar style="margin-top: 20 px">
-				<p:toolbarGroup>
-					<p:commandButton value="Pesquisar" action="#{pesquisaUsuarioBean.pesquisar}" update="@form"/>						
-				</p:toolbarGroup>
-					
-				<p:toolbarGroup align="right">
-					<p:button value="Novo" outcome="/Cliente/CadastroUsuario"/>
-				</p:toolbarGroup>
-			</p:toolbar>
-			
-			<p:panelGrid columns="2" id="PainelPesquisa" style="margin-top: 25px" 
-			columnClasses="rotuloPesquisa, campo">
-			
-				<p:outputLabel value="Nome do Paciente" for="nomePaciente"/>
-				<p:inputText id="nomePaciente" size="50" value="#{pesquisaUsuarioBean.filtro.nomePaciente}"/>
-				<p:outputLabel value="Nome do Profissional" for="nomeProfissional"/>
-				<p:inputText id="nomeProfissional" size="50" value="#{pesquisaUsuarioBean.filtro.nomeProfissional}"/>
-				<p:outputLabel value="Login" for="login"/>
-				<p:inputMask id="login" size="50" value="#{pesquisaUsuarioBean.filtro.login}"/>
+	<ui:define name="content">
+		<div class="Container100">
+			<div class="ContainerIndent">
+				<div class="Card ShadowEffect TexAlCenter">
+					<h:form>
+						<div class="EmptyBox20"></div>
+						<h1>Pesquisar Usuário</h1>
+						<div class="EmptyBox20"></div>
+						
+						<p:toolbar style="margin-top: 20 px">
+							<p:toolbarGroup>
+								<p:commandButton value="Pesquisar" action="#{pesquisaUsuarioBean.pesquisar}" update="@form"/>						
+							</p:toolbarGroup>
 								
-			</p:panelGrid>
-			
-			<p:dataTable id="tabelaUsuario" value="#{pesquisaUsuarioBean.usuariosFiltrados}" var="usuarios" style="margin-top: 20px" 
-			emptyMessage="Nenhum usuário encontrado" rows="7" paginator="true" 
-			paginatorAlwaysVisible="false" paginatorPosition="bottom"  >
-			
-				<p:column headerText="Código" style="text-align: center" width="280">
-					<h:outputText value="#{usuarios.id}"/>					
-				</p:column>
-				<p:column headerText="Login" style="text-align: center" width="280">
-					<h:outputText value="#{usuarios.login}"/>
-				</p:column>
-				<p:column headerText="Senha" style="text-align: center" width="100">
-					<h:outputText value="#{usuarios.senha}"/>
-				</p:column>
-					
-				<p:column headerText="Ações" style="text-align: center"  width="70">
-					<p:button icon="ui-icon-pencil" title="Editar"/>
-					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="exclusaoUsuario.show()"/>
-				</p:column>
-				
-			</p:dataTable>
-			
-			<p:confirmDialog header="Exclusao de Usuário" message="Tem certeza que deseja excluir este usuário?"
-							widgetVar="exclusaoUsuario">
-				<p:commandButton value="Sim" oncomplete="exclusaoUsuario.hide();"/>
-				<p:button value="Não" onclick="exclusaoUsuario.hide(); return false;"/>
-			</p:confirmDialog>
-	
-		</h:form>	
+							<p:toolbarGroup align="right">
+								<p:button value="Novo" outcome="/Cliente/CadastroUsuario"/>
+							</p:toolbarGroup>
+						</p:toolbar>
+						
+						<div class="EmptyBox20"></div>
+						<p:panelGrid columns="2" id="PainelPesquisa">
+						
+							<p:outputLabel value="Nome do Paciente" for="nomePaciente"/>
+							<p:inputText id="nomePaciente"  value="#{pesquisaUsuarioBean.filtro.nomePaciente}"/>
+							<p:outputLabel value="Nome do Profissional" for="nomeProfissional"/>
+							<p:inputText id="nomeProfissional"  value="#{pesquisaUsuarioBean.filtro.nomeProfissional}"/>
+							<p:outputLabel value="Login" for="login"/>
+							<p:inputMask id="login"  value="#{pesquisaUsuarioBean.filtro.login}"/>
+											
+						</p:panelGrid>
+						
+						<p:dataTable id="tabelaUsuario" value="#{pesquisaUsuarioBean.usuariosFiltrados}" var="usuarios" style="margin-top: 20px" 
+						emptyMessage="Nenhum usuário encontrado" rows="7" paginator="true" 
+						paginatorAlwaysVisible="false" paginatorPosition="bottom"  >
+						
+							<p:column headerText="Código" style="text-align: center" width="280">
+								<h:outputText value="#{usuarios.id}"/>					
+							</p:column>
+							<p:column headerText="Login" style="text-align: center" width="280">
+								<h:outputText value="#{usuarios.login}"/>
+							</p:column>
+							<p:column headerText="Senha" style="text-align: center" width="100">
+								<h:outputText value="#{usuarios.senha}"/>
+							</p:column>
+								
+							<p:column headerText="Ações" style="text-align: center"  width="70">
+								<p:button icon="ui-icon-pencil" title="Editar"/>
+								<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="exclusaoUsuario.show()"/>
+							</p:column>
 							
+						</p:dataTable>
+						
+						<p:confirmDialog header="Exclusao de Usuário" message="Tem certeza que deseja excluir este usuário?"
+										widgetVar="exclusaoUsuario">
+							<p:commandButton value="Sim" oncomplete="exclusaoUsuario.hide();"/>
+							<p:button value="Não" onclick="exclusaoUsuario.hide(); return false;"/>
+						</p:confirmDialog>
+				
+					</h:form>
+				</div>
+			</div>
+		</div>							
 	</ui:define>
 	
 </ui:composition>
