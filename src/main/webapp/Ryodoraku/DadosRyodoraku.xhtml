@@ -3,7 +3,8 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:o="http://omnifaces.org/ui">
 
 	<ui:define name="titulo">Ryodoraku</ui:define>
 	
@@ -11,24 +12,23 @@
 		<div class="Container100">
             <div class="ContainerIndent">
                 <div class="Card ShadowEffect">
+                
+                	<f:metadata>
+						<o:viewParam name="ryodoraku" value="#{cadastroRyodorakuBean.ryodoraku}"/>												
+					</f:metadata>
 	
 					<h:form>
 						<div class="EmptyBox20"></div>
-						<h1 class="TexAlCenter">Inserir dados RYODORAKU</h1>
+						<h1 class="TexAlCenter">#{cadastroRyodorakuBean.editando ? 'Edição de dados' : 'Inserir novos dados'}</h1>
 						<div class="EmptyBox20"></div>
 						
 						<p:messages autoUpdate="true" closable="true"/>
 						
-						<p:toolbar style="margin-top: 10 px">
-							<p:toolbarGroup>
-								<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroRyodorakuBean.salvar}" update="@form"/>
-								<p:button value="Limpar tabela" id="limparTabela" outcome="/Ryodoraku/DadosRyodoraku.xhtml"/>	
-								<p:button value="Gráfico" outcome="/Ryodoraku/GraficoRyodoraku" disabled="#{cadastroRyodorakuBean.controle}"/>			
-							</p:toolbarGroup>
-								
-							<!-- <p:toolbarGroup align="right">
-								<p:button value="Pesquisar" outcome="/Ryodoraku/PesquisaRyodoraku"/>
-							</p:toolbarGroup> -->
+						<p:toolbar style="margin-top: 10 px" rendered="#{!cadastroRyodorakuBean.editando}">
+							<p:toolbarGroup>								
+								<p:button value="Limpar tabela" id="limparTabela" outcome="/Ryodoraku/DadosRyodoraku.xhtml" />	
+								<p:button value="Gráfico" outcome="/Ryodoraku/GraficoRyodoraku" disabled="#{cadastroRyodorakuBean.controle}" />			
+							</p:toolbarGroup>							
 						</p:toolbar>
 						
 						<div class="EmptyBox20"></div>	
@@ -60,229 +60,229 @@
 								<p:panelGrid columns="6" id="PainelRyodorakuDireito" layout="grid">
 									
 									<p:outputLabel value="P9" />
-									<p:inputText id="txtP9" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_P9_1}">
+									<p:inputText id="txtP9" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_P9_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="txtP9"/>
 									</p:inputText>
-									<p:inputText id="txtP9-2"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_P9_2}">
+									<p:inputText id="txtP9-2"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_P9_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="txtP9-2"/>
 									</p:inputText>
-									<p:inputText id="txtP9-3"  size="10"	value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_P9_3}">
+									<p:inputText id="txtP9-3"  size="10"	value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_P9_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />									
-										<p:ajax event="change" process="@this" update="txtP9-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoDireito.calcularLadoDireitoP9}" />
+										<p:ajax event="change" process="@this" update="txtP9-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.calcularLadoDireitoP9}" />
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="txtP9-Media"  value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.mediaLD_P9}">
+									<p:outputLabel id="txtP9-Media"  value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.mediaLD_P9}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2"  />
 									</p:outputLabel>
 										
 										
 									<p:outputLabel value="CS7" />
-									<p:inputText id="txtCS7" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_CS7_1}">
+									<p:inputText id="txtCS7" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_CS7_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="txtCS7"/>
 									</p:inputText>	
-									<p:inputText id="txtCS7-2"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_CS7_2}">
+									<p:inputText id="txtCS7-2"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_CS7_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true"/>
 										<p:ajax event="change"  update="txtCS7-2"/>
 									</p:inputText>	
-									<p:inputText id="txtCS7-3"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_CS7_3}">
+									<p:inputText id="txtCS7-3"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_CS7_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="txtCS7-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoDireito.calcularLadoDireitoCS7}"/>
+										<p:ajax event="change" process="@this" update="txtCS7-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.calcularLadoDireitoCS7}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="txtCS7-Media"  size="10"	value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.mediaLD_CS7}">
+									<p:outputLabel id="txtCS7-Media"  size="10"	value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.mediaLD_CS7}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>								
 									
 									
 									<p:outputLabel value="C7" />
-									<p:inputText id="txtC7" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_C7_1}">
+									<p:inputText id="txtC7" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_C7_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="txtC7"/>
 									</p:inputText>
-									<p:inputText id="txtC7-2"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_C7_2}">
+									<p:inputText id="txtC7-2"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_C7_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtC7-2"/>
 									</p:inputText>
-									<p:inputText id="txtC7-3"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_C7_3}">
+									<p:inputText id="txtC7-3"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_C7_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="txtC7-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoDireito.calcularLadoDireitoC7}"/>
+										<p:ajax event="change" process="@this" update="txtC7-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.calcularLadoDireitoC7}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="txtC7-Media"  size="10"  value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.mediaLD_C7}">
+									<p:outputLabel id="txtC7-Media"  size="10"  value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.mediaLD_C7}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>									
 									
 									
 									<p:outputLabel value="ID5" />
-									<p:inputText id="txtID5" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_ID5_1}">
+									<p:inputText id="txtID5" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_ID5_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="txtID5"/>
 									</p:inputText>										
-									<p:inputText id="txtID5-2"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_ID5_2}">
+									<p:inputText id="txtID5-2"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_ID5_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtID5-2"/>
 									</p:inputText>
-									<p:inputText id="txtID5-3"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_ID5_3}">
+									<p:inputText id="txtID5-3"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_ID5_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="txtID5-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoDireito.calcularLadoDireitoID5}"/>
+										<p:ajax event="change" process="@this" update="txtID5-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.calcularLadoDireitoID5}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="txtID5-Media"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.mediaLD_ID5}">
+									<p:outputLabel id="txtID5-Media"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.mediaLD_ID5}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>									
 									
 									
 									<p:outputLabel value="TR4" />
-									<p:inputText id="txtTR4" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_TR4_1}">
+									<p:inputText id="txtTR4" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_TR4_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtTR4"/>
 									</p:inputText>
-									<p:inputText id="txtTR4-2"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_TR4_2}">
+									<p:inputText id="txtTR4-2"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_TR4_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtTR4-2"/>
 									</p:inputText>
-									<p:inputText id="txtTR4-3"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_TR4_3}">
+									<p:inputText id="txtTR4-3"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_TR4_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="txtTR4-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoDireito.calcularLadoDireitoTR4}"/>
+										<p:ajax event="change" process="@this" update="txtTR4-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.calcularLadoDireitoTR4}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="txtTR4-Media"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.mediaLD_TR4}">
+									<p:outputLabel id="txtTR4-Media"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.mediaLD_TR4}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>									
 									
 									
 									<p:outputLabel value="IG5" />
-									<p:inputText id="txtIG5" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_IG5_1}">
+									<p:inputText id="txtIG5" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_IG5_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtIG5"/>
 									</p:inputText>
-									<p:inputText id="txtIG5-2"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_IG5_2}">
+									<p:inputText id="txtIG5-2"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_IG5_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtIG5-2"/>
 									</p:inputText>
-									<p:inputText id="txtIG5-3"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_IG5_3}">
+									<p:inputText id="txtIG5-3"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_IG5_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="txtIG5-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoDireito.calcularLadoDireitoIG5}"/>
+										<p:ajax event="change" process="@this" update="txtIG5-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.calcularLadoDireitoIG5}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="txtIG5-Media"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.mediaLD_IG5}">
+									<p:outputLabel id="txtIG5-Media"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.mediaLD_IG5}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 									
 									<p:outputLabel value="BP3" />
-									<p:inputText id="txtBP3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_BP3_1}">
+									<p:inputText id="txtBP3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_BP3_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtBP3"/>
 									</p:inputText>		
-									<p:inputText id="txtBP3-2"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_BP3_2}">
+									<p:inputText id="txtBP3-2"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_BP3_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtBP3-2"/>
 									</p:inputText>
-									<p:inputText id="txtBP3-3"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_BP3_3}">
+									<p:inputText id="txtBP3-3"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_BP3_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="txtBP3-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoDireito.calcularLadoDireitoBP3}"/>
+										<p:ajax event="change" process="@this" update="txtBP3-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.calcularLadoDireitoBP3}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="txtBP3-Media"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.mediaLD_BP3}">
+									<p:outputLabel id="txtBP3-Media"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.mediaLD_BP3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 																
 									<p:outputLabel value="F3" />
-									<p:inputText id="txtF3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_F3_1}">
+									<p:inputText id="txtF3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_F3_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtF3"/>
 									</p:inputText>	
-									<p:inputText id="txtF3-2"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_F3_2}">
+									<p:inputText id="txtF3-2"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_F3_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtF3-2"/>
 									</p:inputText>
-									<p:inputText id="txtF3-3"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_F3_3}">
+									<p:inputText id="txtF3-3"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_F3_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="txtF3-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoDireito.calcularLadoDireitoF3}"/>
+										<p:ajax event="change" process="@this" update="txtF3-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.calcularLadoDireitoF3}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="txtF3-Media"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.mediaLD_F3}">
+									<p:outputLabel id="txtF3-Media"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.mediaLD_F3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 																		
 									<p:outputLabel value="R4" />
-									<p:inputText id="txtR4" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_R4_1}">
+									<p:inputText id="txtR4" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_R4_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtR4"/>
 									</p:inputText>
-									<p:inputText id="txtR4-2"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_R4_2}">
+									<p:inputText id="txtR4-2"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_R4_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtR4-2"/>
 									</p:inputText>
-									<p:inputText id="txtR4-3"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_R4_3}">
+									<p:inputText id="txtR4-3"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_R4_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="txtR4-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoDireito.calcularLadoDireitoR4}"/>
+										<p:ajax event="change" process="@this" update="txtR4-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.calcularLadoDireitoR4}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="txtR4-Media"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.mediaLD_R4}">
+									<p:outputLabel id="txtR4-Media"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.mediaLD_R4}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 																	
 									<p:outputLabel value="B65" />
-									<p:inputText id="txtB65"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_B65_1}">
+									<p:inputText id="txtB65"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_B65_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtB65"/>
 									</p:inputText>	
-									<p:inputText id="txtB65-2"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_B65_2}">
+									<p:inputText id="txtB65-2"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_B65_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtB65-2"/>
 									</p:inputText>
-									<p:inputText id="txtB65-3"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_B65_3}">
+									<p:inputText id="txtB65-3"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_B65_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="txtB65-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoDireito.calcularLadoDireitoB65}"/>
+										<p:ajax event="change" process="@this" update="txtB65-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.calcularLadoDireitoB65}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="txtB65-Media"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.mediaLD_B65}">
+									<p:outputLabel id="txtB65-Media"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.mediaLD_B65}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 																		
 									<p:outputLabel value="VB40" />
-									<p:inputText id="txtVB40"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_VB40_1}">
+									<p:inputText id="txtVB40"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_VB40_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtVB40"/>
 									</p:inputText>	
-									<p:inputText id="txtVB40-2"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_VB40_2}">
+									<p:inputText id="txtVB40-2"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_VB40_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtVB40-2"/>
 									</p:inputText>
-									<p:inputText id="txtVB40-3"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_VB40_3}">
+									<p:inputText id="txtVB40-3"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_VB40_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="txtVB40-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoDireito.calcularLadoDireitoVB40}"/>
+										<p:ajax event="change" process="@this" update="txtVB40-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.calcularLadoDireitoVB40}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="txtVB40-Media"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.mediaLD_VB40}">
+									<p:outputLabel id="txtVB40-Media"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.mediaLD_VB40}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 																		
 									<p:outputLabel value="E42" />
-									<p:inputText id="txtE42"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_E42_1}">
+									<p:inputText id="txtE42"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_E42_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtE42"/>
 									</p:inputText>
-									<p:inputText id="txtE42-2"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_E42_2}">
+									<p:inputText id="txtE42-2"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_E42_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change" update="txtE42-2"/>
 									</p:inputText>
-									<p:inputText id="txtE42-3"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.LD_E42_3}">
+									<p:inputText id="txtE42-3"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.LD_E42_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="txtE42-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoDireito.calcularLadoDireitoE42}"/>
+										<p:ajax event="change" process="@this" update="txtE42-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.calcularLadoDireitoE42}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="txtE42-Media"  size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoDireito.mediaLD_E42}">
+									<p:outputLabel id="txtE42-Media"  size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoDireito.mediaLD_E42}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 								</p:panelGrid>
@@ -295,218 +295,218 @@
 								<p:panelGrid columns="6" id="PainelRyodorakuEsquerdo" layout="grid">
 							
 									<p:outputLabel value="P9" />
-									<p:inputText id="E-txtP9" size="10"	value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_P9_1}">
+									<p:inputText id="E-txtP9" size="10"	value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_P9_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtP9"/>
 									</p:inputText>
-									<p:inputText id="E-txtP9-2" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_P9_2}">
+									<p:inputText id="E-txtP9-2" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_P9_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtP9-2"/>
 									</p:inputText>
-									<p:inputText id="E-txtP9-3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_P9_3}">
+									<p:inputText id="E-txtP9-3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_P9_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="E-txtP9-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.calcularLadoEsquerdoP9}"/>
+										<p:ajax event="change" process="@this" update="E-txtP9-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.calcularLadoEsquerdoP9}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="E-txtP9-Media" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.mediaLE_P9}" >
+									<p:outputLabel id="E-txtP9-Media" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.mediaLE_P9}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 									<p:outputLabel value="CS7" />
-									<p:inputText id="E-txtCS7" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_CS7_1}">
+									<p:inputText id="E-txtCS7" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_CS7_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtCS7"/>
 									</p:inputText>
-										<p:inputText id="E-txtCS7-2" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_CS7_2}">
+										<p:inputText id="E-txtCS7-2" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_CS7_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtCS7-2"/>
 									</p:inputText>
-									<p:inputText id="E-txtCS7-3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_CS7_3}">
+									<p:inputText id="E-txtCS7-3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_CS7_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="E-txtCS7-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.calcularLadoEsquerdoCS7}"/>
+										<p:ajax event="change" process="@this" update="E-txtCS7-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.calcularLadoEsquerdoCS7}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="E-txtCS7-Media" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.mediaLE_CS7}">
+									<p:outputLabel id="E-txtCS7-Media" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.mediaLE_CS7}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 									<p:outputLabel value="C7" />
-									<p:inputText id="E-txtC7" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_C7_1}">
+									<p:inputText id="E-txtC7" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_C7_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtC7"/>
 									</p:inputText>
-									<p:inputText id="E-txtC7-2" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_C7_2}">
+									<p:inputText id="E-txtC7-2" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_C7_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtC7-2"/>
 									</p:inputText>
-									<p:inputText id="E-txtC7-3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_C7_3}">
+									<p:inputText id="E-txtC7-3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_C7_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="E-txtC7-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.calcularLadoEsquerdoC7}"/>
+										<p:ajax event="change" process="@this" update="E-txtC7-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.calcularLadoEsquerdoC7}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="E-txtC7-Media" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.mediaLE_C7}">
+									<p:outputLabel id="E-txtC7-Media" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.mediaLE_C7}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 									<p:outputLabel value="ID5" />
-									<p:inputText id="E-txtID5" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_ID5_1}">
+									<p:inputText id="E-txtID5" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_ID5_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtID5"/>
 									</p:inputText>
-									<p:inputText id="E-txtID5-2" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_ID5_2}">
+									<p:inputText id="E-txtID5-2" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_ID5_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtID5-2"/>
 									</p:inputText>
-									<p:inputText id="E-txtID5-3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_ID5_3}">
+									<p:inputText id="E-txtID5-3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_ID5_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="E-txtID5-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.calcularLadoEsquerdoID5}"/>
+										<p:ajax event="change" process="@this" update="E-txtID5-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.calcularLadoEsquerdoID5}"/>
 									</p:inputText>									
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="E-txtID5-Media" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.mediaLE_ID5}">
+									<p:outputLabel id="E-txtID5-Media" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.mediaLE_ID5}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 									<p:outputLabel value="TR4" />
-									<p:inputText id="E-txtTR4" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_TR4_1}">
+									<p:inputText id="E-txtTR4" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_TR4_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtTR4"/>
 									</p:inputText>
-									<p:inputText id="E-txtTR4-2" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_TR4_2}">
+									<p:inputText id="E-txtTR4-2" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_TR4_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtTR4-2"/>
 									</p:inputText>
-									<p:inputText id="E-txtTR4-3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_TR4_3}">
+									<p:inputText id="E-txtTR4-3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_TR4_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="E-txtTR4-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.calcularLadoEsquerdoTR4}"/>
+										<p:ajax event="change" process="@this" update="E-txtTR4-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.calcularLadoEsquerdoTR4}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="E-txtTR4-Media" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.mediaLE_TR4}">
+									<p:outputLabel id="E-txtTR4-Media" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.mediaLE_TR4}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 									<p:outputLabel value="IG5" />
-									<p:inputText id="E-txtIG5" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_IG5_1}">
+									<p:inputText id="E-txtIG5" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_IG5_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtIG5"/>
 									</p:inputText>
-									<p:inputText id="E-txtIG5-2" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_IG5_2}">
+									<p:inputText id="E-txtIG5-2" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_IG5_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtIG5-2"/>
 									</p:inputText>
-									<p:inputText id="E-txtIG5-3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_IG5_3}">
+									<p:inputText id="E-txtIG5-3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_IG5_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="E-txtIG5-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.calcularLadoEsquerdoIG5}"/>
+										<p:ajax event="change" process="@this" update="E-txtIG5-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.calcularLadoEsquerdoIG5}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="E-txtIG5-Media" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.mediaLE_IG5}">
+									<p:outputLabel id="E-txtIG5-Media" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.mediaLE_IG5}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 									<p:outputLabel value="BP3" />
-									<p:inputText id="E-txtBP3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_BP3_1}">
+									<p:inputText id="E-txtBP3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_BP3_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtBP3"/>
 									</p:inputText>
-									<p:inputText id="E-txtBP3-2" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_BP3_2}">
+									<p:inputText id="E-txtBP3-2" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_BP3_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtBP3-2"/>
 									</p:inputText>
-									<p:inputText id="E-txtBP3-3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_BP3_3}">
+									<p:inputText id="E-txtBP3-3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_BP3_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="E-txtBP3-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.calcularLadoEsquerdoBP3}"/>
+										<p:ajax event="change" process="@this" update="E-txtBP3-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.calcularLadoEsquerdoBP3}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="E-txtBP3-Media" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.mediaLE_BP3}">
+									<p:outputLabel id="E-txtBP3-Media" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.mediaLE_BP3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 									<p:outputLabel value="F3" />
-									<p:inputText id="E-txtF3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_F3_1}">
+									<p:inputText id="E-txtF3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_F3_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtF3"/>
 									</p:inputText>
-									<p:inputText id="E-txtF3-2" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_F3_2}">
+									<p:inputText id="E-txtF3-2" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_F3_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtF3-2"/>
 									</p:inputText>
-									<p:inputText id="E-txtF3-3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_F3_3}">
+									<p:inputText id="E-txtF3-3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_F3_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="E-txtF3-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.calcularLadoEsquerdoF3}"/>
+										<p:ajax event="change" process="@this" update="E-txtF3-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.calcularLadoEsquerdoF3}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="E-txtF3-Media" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.mediaLE_F3}">
+									<p:outputLabel id="E-txtF3-Media" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.mediaLE_F3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 									<p:outputLabel value="R4" />
-									<p:inputText id="E-txtR4" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_R4_1}">
+									<p:inputText id="E-txtR4" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_R4_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtR4"/>
 									</p:inputText>
-									<p:inputText id="E-txtR4-2" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_R4_2}">
+									<p:inputText id="E-txtR4-2" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_R4_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtR4-2"/>
 									</p:inputText>
-									<p:inputText id="E-txtR4-3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_R4_3}">
+									<p:inputText id="E-txtR4-3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_R4_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="E-txtR4-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.calcularLadoEsquerdoR4}"/>
+										<p:ajax event="change" process="@this" update="E-txtR4-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.calcularLadoEsquerdoR4}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="E-txtR4-Media" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.mediaLE_R4}">
+									<p:outputLabel id="E-txtR4-Media" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.mediaLE_R4}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 									<p:outputLabel value="B65" />
-									<p:inputText id="E-txtB65" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_B65_1}">
+									<p:inputText id="E-txtB65" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_B65_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtB65"/>
 									</p:inputText>
-									<p:inputText id="E-txtB65-2" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_B65_2}">
+									<p:inputText id="E-txtB65-2" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_B65_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtB65-2"/>
 									</p:inputText>
-									<p:inputText id="E-txtB65-3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_B65_3}">
+									<p:inputText id="E-txtB65-3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_B65_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="E-txtB65-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.calcularLadoEsquerdoB65}"/>
+										<p:ajax event="change" process="@this" update="E-txtB65-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.calcularLadoEsquerdoB65}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="E-txtB65-Media" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.mediaLE_B65}">
+									<p:outputLabel id="E-txtB65-Media" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.mediaLE_B65}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 									<p:outputLabel value="VB40" />
-									<p:inputText id="E-txtVB40" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_VB40_1}">
+									<p:inputText id="E-txtVB40" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_VB40_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtVB40"/>
 									</p:inputText>
-									<p:inputText id="E-txtVB40-2" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_VB40_2}">
+									<p:inputText id="E-txtVB40-2" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_VB40_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtVB40-2"/>
 									</p:inputText>
-									<p:inputText id="E-txtVB40-3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_VB40_3}">
+									<p:inputText id="E-txtVB40-3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_VB40_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="E-txtVB40-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.calcularLadoEsquerdoVB40}"/>
+										<p:ajax event="change" process="@this" update="E-txtVB40-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.calcularLadoEsquerdoVB40}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="E-txtVB40-Media" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.mediaLE_VB40}">
+									<p:outputLabel id="E-txtVB40-Media" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.mediaLE_VB40}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>
 									
 									<p:outputLabel value="E42" />
-									<p:inputText id="E-txtE42" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_E42_1}">
+									<p:inputText id="E-txtE42" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_E42_1}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtE42"/>
 									</p:inputText>
-									<p:inputText id="E-txtE42-2" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_E42_2}">
+									<p:inputText id="E-txtE42-2" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_E42_2}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
 										<p:ajax event="change"  update="E-txtE42-2"/>
 									</p:inputText>
-									<p:inputText id="E-txtE42-3" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.LE_E42_3}">
+									<p:inputText id="E-txtE42-3" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.LE_E42_3}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber integerOnly="true" />
-										<p:ajax event="change" process="@this" update="E-txtE42-Media" listener="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.calcularLadoEsquerdoE42}"/>
+										<p:ajax event="change" process="@this" update="E-txtE42-Media" listener="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.calcularLadoEsquerdoE42}"/>
 									</p:inputText>
 									<p:outputLabel value="Média" />
-									<p:outputLabel id="E-txtE42-Media" size="10" value="#{cadastroRyodorakuBean.ryodorakuLadoEsquerdo.mediaLE_E42}">
+									<p:outputLabel id="E-txtE42-Media" size="10" value="#{cadastroRyodorakuBean.ryodoraku.ladoEsquerdo.mediaLE_E42}" readonly="#{cadastroRyodorakuBean.editando}">
 										<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 									</p:outputLabel>									
 								</p:panelGrid>
@@ -545,6 +545,10 @@
 							<p:commandButton value="Sim" oncomplete="exclusaoUsuario.hide();"/>
 							<p:button value="Não" onclick="exclusaoUsuario.hide(); return false;"/>
 						</p:confirmDialog>
+						
+						<div class="EmptyBox30"></div>
+						<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroRyodorakuBean.salvar}" update="@form"  styleClass="Container20 Responsive100" style="float:right;"  rendered="#{!cadastroRyodorakuBean.editando}"/>
+						<div class="EmptyBox20"></div>
 					 
 					</h:form>
 				</div>

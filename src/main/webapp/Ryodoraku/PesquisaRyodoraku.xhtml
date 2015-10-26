@@ -67,8 +67,13 @@
 							</p:column>
 							
 							<p:column headerText="Ações" style="text-align: center; width:100px;">
-								<p:button icon="icon-pencil" title="Editar"/>
-								<p:commandButton icon="icon-trash" title="Excluir" oncomplete="exclusaoPaciente.show()"/>
+								<p:button icon="fa fa-pencil White" title="Editar" outcome="/Ryodoraku/DadosRyodoraku">
+									<f:param name="ryodoraku" value="#{ryo.id}"/>
+								</p:button>
+								<p:button icon="fa fa-area-chart White" title="Gerar gráfico" outcome="/Ryodoraku/GraficoRyodoraku">
+									<f:param name="ryodoraku" value="#{ryo.id}"/>
+								</p:button>
+								
 							</p:column>
 							
 						</p:dataTable>

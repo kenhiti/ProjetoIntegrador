@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -20,11 +19,11 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	private Pessoa pessoa;
 	private Profissional profissional;
-	private String email;
+	private String perfil;
+	private String login;
 	private String senha;
-	private Boolean restricaoAcesso;
+	
 	
 	@Id
 	@GeneratedValue
@@ -33,34 +32,34 @@ public class Usuario implements Serializable {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}	
+	
+	@NotBlank
+	@Column (name = "perfil" , length = 50 )
+	public String getPerfil() {
+		return perfil;
+	}
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
 	}
 	
 	@NotBlank
-	@Column (name = "email" , length = 50 )
-	public String getEmail() {
-		return email;
+	@Column (name = "login" , length = 50 )
+	public String getLogin() {
+		return login;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 	
 	@NotBlank
 	@Column (name = "senha" , length = 50)
 	public String getSenha() {
 		return senha;
-	}
+	}	
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-	
-	@OneToOne
-	@JoinColumn(name = "pessoa_id", nullable = true)
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;		
-	}
+	}	
 	
 	@OneToOne
 	@JoinColumn(name="profissional_id", nullable = true)
@@ -71,15 +70,6 @@ public class Usuario implements Serializable {
 		this.profissional = profissional;
 	}
 	
-	@NotNull
-	@Column (name = "controle", nullable = false, length = 10)
-	public Boolean getRestricaoAcesso() {
-		return restricaoAcesso;
-	}
-	public void setRestricaoAcesso(Boolean restricaoAcesso) {
-		this.restricaoAcesso = restricaoAcesso;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

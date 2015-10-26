@@ -1,6 +1,7 @@
 package com.projetointegrador.projeto.controller;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -33,10 +34,17 @@ public class GraficoRyodoraku implements Serializable {
      
     @PostConstruct
     public void init() {
-    	this.ryodoraku = (Ryodoraku)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("ryodoraku");
-        //this.ryodoraku = repository.buscarPorId(6L);
-    	createLineModels();
-        
+    	Map<String, String> params =  FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String urlID = params.get("ryodoraku");
+		
+		if(urlID == null){
+			this.ryodoraku = (Ryodoraku)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("ryodoraku");
+		}
+		else{
+			Long id = new Long(urlID);
+			this.ryodoraku = repository.buscarPorId(id);
+		}
+    	createLineModels();        
     }
  
     public LineChartModel getLineModel1() {

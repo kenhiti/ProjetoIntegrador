@@ -41,22 +41,22 @@
 							navigator="true" pages="1" locale="pt" value="#{cadastroClienteBean.cliente.dataNascimento}"/>
 							
 							<p:outputLabel value="Endereço" for="endereco"/>
-							<p:inputText id="endereco" size="40" maxlength="50" value="#{cadastroClienteBean.endereco.logradouro}"/>
+							<p:inputText id="endereco" size="40" maxlength="50" value="#{cadastroClienteBean.cliente.endereco.logradouro}"/>
 							<p:outputLabel value="Numero" for="numero"/>
-							<p:inputText id="numero" size="20" maxlength="10" value="#{cadastroClienteBean.endereco.numero}" />
+							<p:inputText id="numero" size="20" maxlength="10" value="#{cadastroClienteBean.cliente.endereco.numero}" />
 							
 							<p:outputLabel value="Bairro" for="bairro"/>
-							<p:inputText id="bairro" size="40" maxlength="40" value="#{cadastroClienteBean.endereco.bairro}" />
+							<p:inputText id="bairro" size="40" maxlength="40" value="#{cadastroClienteBean.cliente.endereco.bairro}" />
 							<p:outputLabel value="Cidade" for="cidade"/>
-							<p:inputText id="cidade" size="40" maxlength="40" value="#{cadastroClienteBean.endereco.cidade}"/>
+							<p:inputText id="cidade" size="40" maxlength="40" value="#{cadastroClienteBean.cliente.endereco.cidade}"/>
 							
 							<p:outputLabel value="Estado" for="estado"/>
-							<p:inputText id="estado" size="40" maxlength="20" value="#{cadastroClienteBean.endereco.uf}"/>
+							<p:inputText id="estado" size="40" maxlength="20" value="#{cadastroClienteBean.cliente.endereco.uf}"/>
 							<p:outputLabel value="CEP" for="cep"/>
-							<p:inputMask id="cep" mask="99999-999" value="#{cadastroClienteBean.endereco.cep}"/>
+							<p:inputMask id="cep" mask="99999-999" value="#{cadastroClienteBean.cliente.endereco.cep}"/>
 							
 							<p:outputLabel value="Complemento" for="complemento"/>
-							<p:inputText id="complemento" size="40" maxlength="20" value="#{cadastroClienteBean.endereco.complemento}"/>
+							<p:inputText id="complemento" size="40" maxlength="20" value="#{cadastroClienteBean.cliente.endereco.complemento}"/>
 							<p:outputLabel value="Telefone" for="telefone"/>
 							<p:inputMask id="telefone" mask="(99) 9999-9999" value="#{cadastroClienteBean.cliente.telefone}"/>
 							

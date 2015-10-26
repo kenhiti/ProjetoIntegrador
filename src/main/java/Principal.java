@@ -2,7 +2,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.projetointegrador.projeto.model.Profissional;
+import com.projetointegrador.projeto.model.Usuario;
+import com.projetointegrador.projeto.ryororaku.Ryodoraku;
 
 
 
@@ -13,9 +14,9 @@ public class Principal {
 		EntityManagerFactory  factory = Persistence.createEntityManagerFactory("ProgramaPU");
 		EntityManager manager = factory.createEntityManager();
 		
-		Profissional profissional =  manager.find(Profissional.class, 1L);
+		Ryodoraku ryo =  manager.find(Ryodoraku.class, 1L);
 		
-		System.out.println(profissional);
+		System.out.println(ryo);
 		
 	}
 }

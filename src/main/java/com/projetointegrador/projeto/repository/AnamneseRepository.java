@@ -48,4 +48,8 @@ private static final long serialVersionUID = 1L;
 		return criteria.list();
 	}
 
+	public Anamnese buscarPorId(Long id) {
+		return manager.find(Anamnese.class, id);
+	}
+
 }

@@ -1,10 +1,8 @@
 package com.projetointegrador.projeto.model;
 
-
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-
 
 @Embeddable
 public class Endereco implements Serializable {

@@ -33,9 +33,6 @@ public class PesquisaUsuarioBean implements Serializable {
 	public void pesquisar(){
 		usuariosFiltrados = usuarioRepository.filtrados(filtro);	
 		
-		for (Usuario x : usuariosFiltrados) {
-			System.out.println("teste: " +x.getEmail() );
-		}
 	}
 
 	public List<Usuario> getUsuariosFiltrados() {

@@ -61,15 +61,20 @@ public class CadastroAnamneseBean implements Serializable {
 	}
 	
 	public void limpar(){
-		anamnese = new Anamnese();
-		diagnostico = new Diagnostico();
-		exameFisico = new ExameFisico();
-		historico = new Historico();
-		preferencias = new Preferencias();
-		problemas = new Problemas();
-		pulsologia = new Pulsologia();
-		tipologia = new Tipologia();
 		
+		this.profissionalSelecionado = new Profissional();
+		this.pessoaSelecionada = new Pessoa();
+		
+		this.anamnese = new Anamnese();
+		this.anamnese.setDiagnostico( new Diagnostico());
+		this.anamnese.setExameFisico(new ExameFisico());
+		this.anamnese.setHistorico(new Historico());
+		this.anamnese.setPreferencias(new Preferencias());
+		this.anamnese.setProblemas(new Problemas());
+		this.anamnese.setPulsologia(new Pulsologia());
+		this.anamnese.setTipologia(new Tipologia());
+		this.anamnese.setCliente(new Pessoa());
+		this.anamnese.setProfissional(new Profissional());		
 	}
 	
 	public void inicializar(){
@@ -78,29 +83,39 @@ public class CadastroAnamneseBean implements Serializable {
 		profissionais = profissionalRepository.buscarProfissional();
 		
 	}
-	public void salvar(){
-		
-		this.anamnese.setDiagnostico(diagnostico);
-		this.anamnese.setExameFisico(exameFisico);
-		this.anamnese.setHistorico(historico);
-		this.anamnese.setPreferencias(preferencias);
-		this.anamnese.setProblemas(problemas);
-		this.anamnese.setPulsologia(pulsologia);
-		this.anamnese.setTipologia(tipologia);
+	public void salvar(){		
 		this.anamnese.setCliente(pessoaSelecionada);
 		this.anamnese.setProfissional(profissionalSelecionado);
 		this.anamnese.setDataCriacao(new Date());
 		this.anamnese = cadastroAnamneseService.salvar(this.anamnese);
 		limpar();
-		FacesUtil.addInfoMessage("Paciente salvo com sucesso!");
+		FacesUtil.addInfoMessage("Ficha salvo com sucesso!");
+	}
+	
+	public boolean isEditando(){
+		return this.anamnese.getId() != null;
 	}
 
 	public Anamnese getAnamnese() {
 		return anamnese;
 	}
+	
+	public void setAnamnese(Anamnese anamnese){
+		this.anamnese = anamnese;
+		
+		if(this.anamnese != null){
+			this.profissionalSelecionado = this.anamnese.getProfissional();
+			this.pessoaSelecionada = this.anamnese.getCliente();
+		}
+		
+	}
 
 	public List<Pessoa> getClientes() {
 		return clientes;
+	}	
+
+	public void setClientes(List<Pessoa> clientes) {
+		this.clientes = clientes;
 	}
 
 	public List<Profissional> getProfissionais() {

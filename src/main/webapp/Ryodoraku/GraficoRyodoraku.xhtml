@@ -3,7 +3,8 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:o="http://omnifaces.org/ui">
 
 	<ui:define name="titulo">Gráfico</ui:define>
 	
@@ -11,6 +12,10 @@
 		<div class="Container100">
 			<div class="ContainerIndent">
 				<div class="Card ShadowEffect TexAlCenter">
+				
+					<f:metadata>
+						<o:viewParam name="ryodoraku" value="#{graficoRyodoraku.ryodoraku}"></o:viewParam>
+					</f:metadata>
 					<h:form>
 						<div class="EmptyBox20"></div>
 						<h1>Gráfico de análise</h1>

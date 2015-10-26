@@ -29,12 +29,12 @@ public class CadastroClienteBean implements Serializable {
 	
 	private void limpar(){
 		cliente = new Pessoa();	
-		endereco = new Endereco();		
+		cliente.setEndereco(new Endereco());				
 	}
 	
 	public void salvar(){
 		
-		this.cliente.setEndereco(endereco);
+		
 		this.cliente = cadastroClienteService.salvar(this.cliente);
 		limpar();
 		FacesUtil.addInfoMessage("Paciente salvo com sucesso!");

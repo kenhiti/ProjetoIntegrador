@@ -32,13 +32,13 @@ public class CadastroProfissionalBean implements Serializable {
 	}
 	
 	private void limpar(){
-		endereco = new Endereco();
 		profissional = new Profissional();
+		profissional.setEndereco(new Endereco());
 		
 	}
 	
 	public void salvar(){
-		this.profissional.setEndereco(endereco);
+		
 		this.profissional= cadastroProfissionalService.salvar(this.profissional);
 		limpar();
 		FacesUtil.addInfoMessage("Profissional salvo com sucesso!");

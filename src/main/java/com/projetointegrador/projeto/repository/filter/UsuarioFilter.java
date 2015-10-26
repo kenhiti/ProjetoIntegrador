@@ -6,7 +6,6 @@ public class UsuarioFilter implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private String nomePaciente;
 	private String nomeProfissional;
 	private String login;
 		
@@ -16,12 +15,7 @@ public class UsuarioFilter implements Serializable{
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	public String getNomePaciente() {
-		return nomePaciente;
-	}
-	public void setNomePaciente(String nomePaciente) {
-		this.nomePaciente = nomePaciente;
-	}
+	
 	public String getNomeProfissional() {
 		return nomeProfissional;
 	}

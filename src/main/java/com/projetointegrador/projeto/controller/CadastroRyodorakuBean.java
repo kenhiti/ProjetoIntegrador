@@ -56,8 +56,8 @@ public class CadastroRyodorakuBean implements Serializable {
 	
 	public void limpar(){
 		ryodoraku = new Ryodoraku();
-		ryodorakuLadoDireito = new RyodorakuLadoDireito();
-		ryodorakuLadoEsquerdo = new RyodorakuLadoEsquerdo();
+		ryodoraku.setLadoDireito(new RyodorakuLadoDireito());
+		ryodoraku.setLadoEsquerdo(new RyodorakuLadoEsquerdo());		
 	}
 	
 	@PostConstruct	
@@ -68,8 +68,6 @@ public class CadastroRyodorakuBean implements Serializable {
 	}	
 		
 	public void salvar(){
-		this.ryodoraku.setLadoDireito(ryodorakuLadoDireito);
-		this.ryodoraku.setLadoEsquerdo(ryodorakuLadoEsquerdo);
 		this.ryodoraku.setDatahj(new Date());
 		this.ryodoraku.setCliente(pessoaSelecionada);
 		this.ryodoraku.setProfissional(profissionalSelecionado);
@@ -79,7 +77,7 @@ public class CadastroRyodorakuBean implements Serializable {
 		this.ryodoraku = cadastroRyodorakuService.salvar(this.ryodoraku);
 		popularObjetoGrafico();
 		limpar();
-		FacesUtil.addInfoMessage("Paciente salvo com sucesso!");
+		FacesUtil.addInfoMessage("Dados salvo com sucesso!");
 		controle = false;
 	}
 	
@@ -96,23 +94,38 @@ public class CadastroRyodorakuBean implements Serializable {
 	}
 	
 	private Double calcularReferenciaDireito(){
-		Double soma = ryodorakuLadoDireito.getMediaLD_B65()+ryodorakuLadoDireito.getMediaLD_BP3()+ryodorakuLadoDireito.getMediaLD_C7()+
-				ryodorakuLadoDireito.getMediaLD_CS7()+ryodorakuLadoDireito.getMediaLD_E42()+ryodorakuLadoDireito.getMediaLD_F3()+
-				ryodorakuLadoDireito.getMediaLD_ID5()+ryodorakuLadoDireito.getMediaLD_IG5()+ryodorakuLadoDireito.getMediaLD_P9()+
-				ryodorakuLadoDireito.getMediaLD_R4()+ryodorakuLadoDireito.getMediaLD_TR4()+ryodorakuLadoDireito.getMediaLD_VB40();
+		Double soma = ryodoraku.getLadoDireito().getMediaLD_B65()+ryodoraku.getLadoDireito().getMediaLD_BP3()+ryodoraku.getLadoDireito().getMediaLD_C7()+
+				ryodoraku.getLadoDireito().getMediaLD_CS7()+ryodoraku.getLadoDireito().getMediaLD_E42()+ryodoraku.getLadoDireito().getMediaLD_F3()+
+				ryodoraku.getLadoDireito().getMediaLD_ID5()+ryodoraku.getLadoDireito().getMediaLD_IG5()+ryodoraku.getLadoDireito().getMediaLD_P9()+
+				ryodoraku.getLadoDireito().getMediaLD_R4()+ryodoraku.getLadoDireito().getMediaLD_TR4()+ryodoraku.getLadoDireito().getMediaLD_VB40();
 		return soma / 12.0;				
 	}
 	
 	private Double calcularReferenciaEsquerdo(){
-		Double soma = ryodorakuLadoEsquerdo.getMediaLE_B65()+ryodorakuLadoEsquerdo.getMediaLE_BP3()+ryodorakuLadoEsquerdo.getMediaLE_C7()+
-				ryodorakuLadoEsquerdo.getMediaLE_CS7()+ryodorakuLadoEsquerdo.getMediaLE_E42()+ryodorakuLadoEsquerdo.getMediaLE_F3()+
-				ryodorakuLadoEsquerdo.getMediaLE_ID5()+ryodorakuLadoEsquerdo.getMediaLE_IG5()+ryodorakuLadoEsquerdo.getMediaLE_P9()+
-				ryodorakuLadoEsquerdo.getMediaLE_R4()+ryodorakuLadoEsquerdo.getMediaLE_TR4()+ryodorakuLadoEsquerdo.getMediaLE_VB40();
+		Double soma = ryodoraku.getLadoEsquerdo().getMediaLE_B65()+ryodoraku.getLadoEsquerdo().getMediaLE_BP3()+ryodoraku.getLadoEsquerdo().getMediaLE_C7()+
+				ryodoraku.getLadoEsquerdo().getMediaLE_CS7()+ryodoraku.getLadoEsquerdo().getMediaLE_E42()+ryodoraku.getLadoEsquerdo().getMediaLE_F3()+
+				ryodoraku.getLadoEsquerdo().getMediaLE_ID5()+ryodoraku.getLadoEsquerdo().getMediaLE_IG5()+ryodoraku.getLadoEsquerdo().getMediaLE_P9()+
+				ryodoraku.getLadoEsquerdo().getMediaLE_R4()+ryodoraku.getLadoEsquerdo().getMediaLE_TR4()+ryodoraku.getLadoEsquerdo().getMediaLE_VB40();
 		return soma / 12.0;		
 	}
+	
+	public boolean isEditando(){
+		return this.ryodoraku.getId() != null;
+	}
+	
 	public Ryodoraku getRyodoraku() {
 		return ryodoraku;
 	}
+	
+	public void setRyodoraku(Ryodoraku ryodoraku){
+		this.ryodoraku = ryodoraku;
+		
+		if(this.ryodoraku != null){
+			this.profissionalSelecionado = this.ryodoraku.getProfissional();
+			this.pessoaSelecionada = this.ryodoraku.getCliente();
+		}
+	}
+	
 
 	public List<Pessoa> getClientes() {
 		return clientes;

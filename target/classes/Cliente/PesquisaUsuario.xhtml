@@ -29,8 +29,6 @@
 						<div class="EmptyBox20"></div>
 						<p:panelGrid columns="2" id="PainelPesquisa">
 						
-							<p:outputLabel value="Nome do Paciente" for="nomePaciente"/>
-							<p:inputText id="nomePaciente"  value="#{pesquisaUsuarioBean.filtro.nomePaciente}"/>
 							<p:outputLabel value="Nome do Profissional" for="nomeProfissional"/>
 							<p:inputText id="nomeProfissional"  value="#{pesquisaUsuarioBean.filtro.nomeProfissional}"/>
 							<p:outputLabel value="Login" for="login"/>
@@ -42,19 +40,24 @@
 						emptyMessage="Nenhum usuário encontrado" rows="7" paginator="true" 
 						paginatorAlwaysVisible="false" paginatorPosition="bottom"  >
 						
-							<p:column headerText="Código" style="text-align: center" width="280">
+							<p:column headerText="Código">
 								<h:outputText value="#{usuarios.id}"/>					
 							</p:column>
-							<p:column headerText="Login" style="text-align: center" width="280">
+							<p:column headerText="Login">
 								<h:outputText value="#{usuarios.login}"/>
 							</p:column>
-							<p:column headerText="Senha" style="text-align: center" width="100">
-								<h:outputText value="#{usuarios.senha}"/>
+							<p:column headerText="Profissional">
+								<h:outputText value="#{usuarios.profissional.nome}"/>
+							</p:column>
+							<p:column headerText="Perfil">
+								<h:outputText value="#{usuarios.perfil}"/>
 							</p:column>
 								
-							<p:column headerText="Ações" style="text-align: center"  width="70">
-								<p:button icon="ui-icon-pencil" title="Editar"/>
-								<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="exclusaoUsuario.show()"/>
+							<p:column headerText="Ações">
+								<p:button icon="fa fa-pencil White" title="Editar" outcome="/Cliente/CadastroUsuario">
+									<f:param name="usuario" value="#{usuarios.id}"/>
+								</p:button>
+								<p:commandButton icon="fa fa-remove White" title="Excluir" oncomplete="exclusaoUsuario.show()"/>
 							</p:column>
 							
 						</p:dataTable>
