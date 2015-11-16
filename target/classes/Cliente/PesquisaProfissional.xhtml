@@ -11,10 +11,13 @@
 		<div class="Container100">
 			<div class="ContainerIndent">
 		    	<div class="Card ShadowEffect TexAlCenter">
-					<h:form>
+					<h:form id="frm_profissional">
 						<div class="EmptyBox20"></div>
 						<h1>Pesquisar Profissional</h1>
 						<div class="EmptyBox20"></div>
+						
+						<p:messages autoUpdate="true" closable="true"/>
+						
 						<p:toolbar style="margin-top: 20 px">
 							<p:toolbarGroup>
 								<p:commandButton value="Pesquisar" action="#{pesquisaProfissionalBean.pesquisar}" update="@form"/>						
@@ -60,17 +63,22 @@
 								<p:button icon=" fa fa-pencil White" title="Editar" outcome="/Cliente/CadastroProfissional">
 									<f:param name="profissional" value="#{profissional.id}"/>
 								</p:button>
-								<p:commandButton icon="fa fa-remove White" title="Excluir" oncomplete="exclusaoProfissional.show()"/>
+								<p:commandButton icon="fa fa-remove White" title="Excluir" oncomplete="PF('exclusaoProfissional').show()"
+								process="@this" update=":frm_profissional:exclusaoProfissionalDialog">
+									<f:setPropertyActionListener value="#{profissional}" target="#{pesquisaProfissionalBean.profissionalSelecionado}"></f:setPropertyActionListener>
+								</p:commandButton>
 							</p:column>
 							
 						</p:dataTable>
 						
 						<p:spacer height="20px"/>
 						
-						<p:confirmDialog header="Exclusao de Profissional" message="Tem certeza que deseja excluir este profissional?"
-										widgetVar="exclusaoProfissional">
-							<p:commandButton value="Sim" oncomplete="exclusaoProfissional.hide();"/>
-							<p:button value="Não" onclick="exclusaoProfissional.hide(); return false;"/>
+						<p:confirmDialog header="Exclusao de Profissional" id="exclusaoProfissionalDialog"
+						message="Tem certeza que deseja excluir este profissional: #{pesquisaProfissionalBean.profissionalSelecionado.nome}?"
+						widgetVar="exclusaoProfissional">
+							<p:commandButton value="Sim" oncomplete="PF('exclusaoProfissional').hide();" action="#{pesquisaProfissionalBean.excluir}"
+							process="@this" update=":frm_profissional:tabelaProfissional"/>
+							<p:button value="Não" onclick="PF('exclusaoProfissional').hide(); return false;"/>
 						</p:confirmDialog>
 							 
 					</h:form>

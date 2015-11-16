@@ -10,10 +10,14 @@
 	<ui:define name="content">
 		<div class="Container100">
 			<div class="ContainerIndent">
-				<div class="Card ShadowEffect TexAlCenter">
-					<h:form>
+				<div class="Card ShadowEffect TexAlCenter">				
 					
+					<h:form id="frm_paciente_pesquisa">
+						<div class="EmptyBox20"></div>
 						<h1>Pesquisar Paciente</h1>
+						<div class="EmptyBox20"></div>
+						
+						<p:messages autoUpdate="true" closable="true"/>
 						
 						<p:toolbar style="margin-top: 20 px">
 							<p:toolbarGroup>
@@ -24,12 +28,11 @@
 								<p:button value="Novo" outcome="/Cliente/CadastroCliente"/>
 							</p:toolbarGroup>
 						</p:toolbar>
-						
-						<p:panelGrid columns="2" id="PainelPesquisa" style="margin-top: 15px" 
-						columnClasses="rotuloPesquisa, campo">
+						<div class="EmptyBox20"></div>
+						<p:panelGrid columns="2" id="PainelPesquisa">
 						
 							<p:outputLabel value="Nome" for="nome"/>
-							<p:inputText id="nome" size="30" value="#{pesquisaClienteBean.filtro.nome}"/>
+							<p:inputText id="nome" value="#{pesquisaClienteBean.filtro.nome}"/>
 							<p:outputLabel value="Telefone" for="telefone"/>
 							<p:inputMask id="telefone" mask="(99) 9999-9999" value="#{pesquisaClienteBean.filtro.telefone}"/>
 							<p:outputLabel value="Celular" for="celular"/>
@@ -58,18 +61,25 @@
 								<h:outputText value="#{pacientes.celular}"/>
 							</p:column>				
 							<p:column headerText="Ações" style="text-align: center; width:100px;">
-								<p:button icon="icon-pencil" title="Editar"/>
-								<p:commandButton icon="icon-trash" title="Excluir" oncomplete="exclusaoPaciente.show()"/>
+								<p:button icon="fa fa-pencil White" title="Editar" outcome="/Cliente/CadastroCliente">
+									<f:param name="cliente" value="#{pacientes.id}"/>
+								</p:button>
+								<p:commandButton icon="fa fa-remove White" title="Excluir" oncomplete="PF('exclusaoPaciente').show()" 
+								process="@this" update=":frm_paciente_pesquisa:exclusaoPacienteDialog">
+									<f:setPropertyActionListener value="#{pacientes}" target="#{pesquisaClienteBean.pacienteSelecionado}"></f:setPropertyActionListener>
+								</p:commandButton>
 							</p:column>
 							
 						</p:dataTable>
 						
 						<p:spacer height="20px"/>
 						
-						<p:confirmDialog header="Exclusao de Pacientes" message="Tem certeza que deseja excluir este paciente?"
-										widgetVar="exclusaoPaciente">
-							<p:commandButton value="Sim" oncomplete="exclusaoPaciente.hide();"/>
-							<p:button value="Não" onclick="exclusaoPaciente.hide(); return false;"/>
+						<p:confirmDialog header="Exclusao de Pacientes" id="exclusaoPacienteDialog"
+						message="Tem certeza que deseja excluir este paciente: #{pesquisaClienteBean.pacienteSelecionado.nome} ?"
+						widgetVar="exclusaoPaciente">
+							<p:commandButton value="Sim" oncomplete="PF('exclusaoPaciente').hide();" action="#{pesquisaClienteBean.excluir}"
+							process="@this" update="frm_paciente_pesquisa:tabelaPacientes"/>
+							<p:button value="Não" onclick="PF('exclusaoPaciente').hide(); return false;"/>
 						</p:confirmDialog>				
 					</h:form>	
 				</div>

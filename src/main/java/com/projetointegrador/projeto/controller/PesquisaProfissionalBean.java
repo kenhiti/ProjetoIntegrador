@@ -10,12 +10,15 @@ import javax.inject.Named;
 import com.projetointegrador.projeto.model.Profissional;
 import com.projetointegrador.projeto.repository.ProfissionalRepository;
 import com.projetointegrador.projeto.repository.filter.ProfissionalFilter;
+import com.projetointegrador.projeto.util.JSF.FacesUtil;
 
 @Named
 @ViewScoped
 public class PesquisaProfissionalBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	
+	private Profissional profissionalSelecionado;
 	
 	@Inject
 	private ProfissionalRepository profissionalRepository;
@@ -31,6 +34,12 @@ public class PesquisaProfissionalBean implements Serializable {
 	public void pesquisar(){
 		profissionalFiltrados = profissionalRepository.filtrados(filtro);
 	}
+	
+	public void excluir(){
+		profissionalRepository.excluir(profissionalSelecionado);
+		profissionalFiltrados.remove(profissionalSelecionado);
+		FacesUtil.addInfoMessage("Profissional: "+profissionalSelecionado.getNome()+" excluído com sucesso.");
+	}
 
 	public ProfissionalFilter getFiltro() {
 		return filtro;
@@ -38,5 +47,13 @@ public class PesquisaProfissionalBean implements Serializable {
 
 	public List<Profissional> getProfissionalFiltrados() {
 		return profissionalFiltrados;
+	}
+
+	public Profissional getProfissionalSelecionado() {
+		return profissionalSelecionado;
+	}
+
+	public void setProfissionalSelecionado(Profissional profissionalSelecionado) {
+		this.profissionalSelecionado = profissionalSelecionado;
 	}	
 }

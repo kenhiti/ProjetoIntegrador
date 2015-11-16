@@ -12,10 +12,13 @@
 			<div class="ContainerIndent">
 				<div class="Card ShadowEffect TexAlCenter">				
 					
-					<h:form>
+					<h:form id="frm_paciente_pesquisa">
 						<div class="EmptyBox20"></div>
 						<h1>Pesquisar Paciente</h1>
 						<div class="EmptyBox20"></div>
+						
+						<p:messages autoUpdate="true" closable="true"/>
+						
 						<p:toolbar style="margin-top: 20 px">
 							<p:toolbarGroup>
 								<p:commandButton value="Pesquisar" action="#{pesquisaClienteBean.pesquisar}" update="@form"/>						
@@ -61,17 +64,22 @@
 								<p:button icon="fa fa-pencil White" title="Editar" outcome="/Cliente/CadastroCliente">
 									<f:param name="cliente" value="#{pacientes.id}"/>
 								</p:button>
-								<p:commandButton icon="fa fa-remove White" title="Excluir" oncomplete="exclusaoPaciente.show()"/>
+								<p:commandButton icon="fa fa-remove White" title="Excluir" oncomplete="PF('exclusaoPaciente').show()" 
+								process="@this" update=":frm_paciente_pesquisa:exclusaoPacienteDialog">
+									<f:setPropertyActionListener value="#{pacientes}" target="#{pesquisaClienteBean.pacienteSelecionado}"></f:setPropertyActionListener>
+								</p:commandButton>
 							</p:column>
 							
 						</p:dataTable>
 						
 						<p:spacer height="20px"/>
 						
-						<p:confirmDialog header="Exclusao de Pacientes" message="Tem certeza que deseja excluir este paciente?"
-										widgetVar="exclusaoPaciente">
-							<p:commandButton value="Sim" oncomplete="exclusaoPaciente.hide();"/>
-							<p:button value="Não" onclick="exclusaoPaciente.hide(); return false;"/>
+						<p:confirmDialog header="Exclusao de Pacientes" id="exclusaoPacienteDialog"
+						message="Tem certeza que deseja excluir este paciente: #{pesquisaClienteBean.pacienteSelecionado.nome} ?"
+						widgetVar="exclusaoPaciente">
+							<p:commandButton value="Sim" oncomplete="PF('exclusaoPaciente').hide();" action="#{pesquisaClienteBean.excluir}"
+							process="@this" update="frm_paciente_pesquisa:tabelaPacientes"/>
+							<p:button value="Não" onclick="PF('exclusaoPaciente').hide(); return false;"/>
 						</p:confirmDialog>				
 					</h:form>	
 				</div>

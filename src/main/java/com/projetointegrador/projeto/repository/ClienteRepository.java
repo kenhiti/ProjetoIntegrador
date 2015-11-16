@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -15,6 +16,8 @@ import org.hibernate.criterion.Restrictions;
 
 import com.projetointegrador.projeto.model.Pessoa;
 import com.projetointegrador.projeto.repository.filter.ClienteFilter;
+import com.projetointegrador.projeto.services.NegocioException;
+import com.projetointegrador.projeto.util.JPA.Transactional;
 
 public class ClienteRepository implements Serializable{
 
@@ -54,5 +57,20 @@ public class ClienteRepository implements Serializable{
 		
 		return criteria.addOrder(Order.asc("nome")).list();
 	}
+	
+	@Transactional
+	public void excluir(Pessoa pessoa) {
+		try{
+			pessoa = porId(pessoa.getId());
+			manager.remove(pessoa);
+			manager.flush();
+		}
+		catch(PersistenceException e){
+			e.printStackTrace();
+			throw new NegocioException("Paciente não pode ser excluído.");
+		}
+	}
+	
+	
 
 }

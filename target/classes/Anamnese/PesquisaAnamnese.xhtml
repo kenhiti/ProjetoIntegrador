@@ -70,18 +70,13 @@
 								<p:button icon="fa fa-pencil White" title="Editar" outcome="/Anamnese/FichaAnamnese">
 									<f:param name="anamnese" value="#{anamnese.id}"/>
 								</p:button>
-								<p:commandButton icon="fa fa-remove White" title="Excluir" oncomplete="exclusaoPaciente.show()"/>
+								
 							</p:column>
 							
 						</p:dataTable>
 						
 						<p:spacer height="20px"/>
-						
-						<p:confirmDialog header="Exclusao de Pacientes" message="Tem certeza que deseja excluir este paciente?"
-										widgetVar="exclusaoPaciente">
-							<p:commandButton value="Sim" oncomplete="exclusaoPaciente.hide();"/>
-							<p:button value="Não" onclick="exclusaoPaciente.hide(); return false;"/>
-						</p:confirmDialog>				
+								
 					</h:form>	
 				</div>
 			</div>

@@ -3,17 +3,22 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:o="http://omnifaces.org/ui">
 
-	<ui:define name="titulo">Cadastro de Profissional</ui:define>
+	<ui:define name="titulo">#{cadastroProfissionalBean.editando ? 'Edição do profissional' : 'Novo profissional'}</ui:define>
 	
 	<ui:define name="content">
 		<div class="Container100">
             <div class="ContainerIndent">
                 <div class="Card ShadowEffect">
+                
+                	<f:metadata>
+                		<o:viewParam name="profissional" value="#{cadastroProfissionalBean.profissional}"></o:viewParam>
+                	</f:metadata>
 					<h:form>
 						<div class="EmptyBox20"></div>
-						<h1 class="TexAlCenter">Novo Profissional</h1>
+						<h1 class="TexAlCenter">#{cadastroProfissionalBean.editando ? 'Edição do profissional' : 'Novo profissional'}</h1>
 						<div class="EmptyBox20"></div>
 						
 						<p:messages autoUpdate="true" closable="true"/>				
@@ -36,22 +41,22 @@
 							navigator="true" pages="1" locale="pt" value="#{cadastroProfissionalBean.profissional.dataNascimento}"/>
 							
 							<p:outputLabel value="Endereço" for="enderecoProfissional"/>
-							<p:inputText id="enderecoProfissional" size="40" maxlength="50" value="#{cadastroProfissionalBean.endereco.logradouro}"/>
+							<p:inputText id="enderecoProfissional" size="40" maxlength="50" value="#{cadastroProfissionalBean.profissional.endereco.logradouro}"/>
 							<p:outputLabel value="Numero" for="numeroProfissional"/>
-							<p:inputText id="numeroProfissional" size="20" maxlength="20" value="#{cadastroProfissionalBean.endereco.numero}" />
+							<p:inputText id="numeroProfissional" size="20" maxlength="20" value="#{cadastroProfissionalBean.profissional.endereco.numero}" />
 							
 							<p:outputLabel value="Bairro" for="bairro"/>
-							<p:inputText id="bairro" size="40" maxlength="20" value="#{cadastroProfissionalBean.endereco.bairro}"/>			
+							<p:inputText id="bairro" size="40" maxlength="20" value="#{cadastroProfissionalBean.profissional.endereco.bairro}"/>			
 							<p:outputLabel value="Cidade" for="cidadeProfissional"/>
-							<p:inputText id="cidadeProfissional" size="40" maxlength="20" value="#{cadastroProfissionalBean.endereco.cidade}"/>
+							<p:inputText id="cidadeProfissional" size="40" maxlength="20" value="#{cadastroProfissionalBean.profissional.endereco.cidade}"/>
 							
 							<p:outputLabel value="Estado" for="estadoProfissional"/>
-							<p:inputText id="estadoProfissional" size="40" maxlength="20" value="#{cadastroProfissionalBean.endereco.uf}"/>			
+							<p:inputText id="estadoProfissional" size="40" maxlength="20" value="#{cadastroProfissionalBean.profissional.endereco.uf}"/>			
 							<p:outputLabel value="CEP" for="cepProfissional"/>
-							<p:inputMask id="cepProfissional" mask="99999-999" value="#{cadastroProfissionalBean.endereco.cep}"/>
+							<p:inputMask id="cepProfissional" mask="99999-999" value="#{cadastroProfissionalBean.profissional.endereco.cep}"/>
 							
 							<p:outputLabel value="Complemento" for="complemento"/>
-							<p:inputText id="complemento" size="40" maxlength="20" value="#{cadastroProfissionalBean.endereco.complemento}"/>			
+							<p:inputText id="complemento" size="40" maxlength="20" value="#{cadastroProfissionalBean.profissional.endereco.complemento}"/>			
 							<p:outputLabel value="Telefone" for="telefoneProfissional"/>
 							<p:inputMask id="telefoneProfissional" mask="(99) 9999-9999" value="#{cadastroProfissionalBean.profissional.telefone}"/>
 							

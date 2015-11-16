@@ -17,25 +17,34 @@
     </h:head>
 
     <h:body styleClass="loginbodyblue">
+    
+    	<f:metadata>
+    		<f:viewParam name="dummy" />
+    		<f:event listener="#{loginBean.preRender}" type="preRenderView" />
+    	</f:metadata>
         
         <div class="Wid90 DispBlock MarAuto MarTopPerc5 TexAlCenter">
             <div class="Wid33 MarAuto WidAutoOnMobile">
                 <div class="EmptyBox30"></div>
                 <div class="Card ShadowEffect">
+                	<h:form prependId="false">
                     <div class="EmptyBox40"></div>
 	                <h:graphicImage name="images/logo.png" library="rio-layout" style="width:40%; max-width:200px;"/>
                    <!--  <div class="Wid100 OvHidden BigTopic Fs30"><i class="icon-users Fs40"></i>Login</div> -->
+                	   
+                    <p:messages autoUpdate="true" closable="true"></p:messages>
+                   
                     <div class="EmptyBox40"></div>
-                    <div class="Wid100"><p:inputText placeholder="Email" styleClass="Wid80 TexAlCenter Fs18"/></div>
+                    <div class="Wid100"><p:inputText placeholder="Email" styleClass="Wid80 TexAlCenter Fs18" value="#{loginBean.login}" id="j_username"/></div>
                     <div class="EmptyBox10"></div>
-                    <div class="Wid100"><p:inputText type="password" placeholder="Senha" styleClass="Wid80 TexAlCenter Fs18"/></div>
+                    <div class="Wid100"><p:inputText type="password" placeholder="Senha" styleClass="Wid80 TexAlCenter Fs18" id="j_password"/></div>
                     <div class="EmptyBox30"></div>
                     
-                    <div class="Wid100"><p:button value="Entrar" icon="fa fa-sign-in" styleClass="Wid60 Fs18 White RaisedButton" href="dashboard.xhtml"/></div>
+                    <div class="Wid100"><p:commandButton value="Entrar" icon="fa fa-sign-in" styleClass="Wid60 Fs18 White RaisedButton" action="#{loginBean.login}"  ajax="false"/></div>
                     <div class="EmptyBox5"></div>
                     <div class="Wid100"><p:button value="Esqueceu a senha?" icon="fa fa-lock" styleClass="RedButton Wid60 Fs18 White RaisedButton"/></div>
                     <div class="EmptyBox20"></div>
-                   
+                    </h:form>
                 </div>
                 <div class="Wid100 TexAlCenter MarTop20 Fs14 FontRobotoRegular WhiteBlue">
                         <i class="fa fa-copyright"></i>  OptimusDev - Soluções em TI. <br/> Todos direitos reservados.

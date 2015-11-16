@@ -10,12 +10,15 @@ import javax.inject.Named;
 import com.projetointegrador.projeto.model.Pessoa;
 import com.projetointegrador.projeto.repository.ClienteRepository;
 import com.projetointegrador.projeto.repository.filter.ClienteFilter;
+import com.projetointegrador.projeto.util.JSF.FacesUtil;
 
 @Named
 @ViewScoped
 public class PesquisaClienteBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	
+	private Pessoa pacienteSelecionado;
 	
 	@Inject
 	private ClienteRepository clienteRepository;
@@ -26,6 +29,7 @@ public class PesquisaClienteBean implements Serializable {
 		
 	public PesquisaClienteBean(){
 		filtro = new ClienteFilter();
+		pacienteSelecionado = new Pessoa();
 	}
 	
 	public void pesquisar(){
@@ -33,7 +37,9 @@ public class PesquisaClienteBean implements Serializable {
 	}
 	
 	public void excluir(){
-		
+		clienteRepository.excluir(pacienteSelecionado);
+		clientesFiltrados.remove(pacienteSelecionado);
+		FacesUtil.addInfoMessage("Paciente: "+pacienteSelecionado.getNome()+" excluído com sucesso!!!");
 	}
 	
 	public List<Pessoa> getClientesFiltrados() {
@@ -43,5 +49,12 @@ public class PesquisaClienteBean implements Serializable {
 	public ClienteFilter getFiltro() {
 		return filtro;
 	}
-	
+
+	public Pessoa getPacienteSelecionado() {
+		return pacienteSelecionado;
+	}
+
+	public void setPacienteSelecionado(Pessoa pacienteSelecionado) {
+		this.pacienteSelecionado = pacienteSelecionado;
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -15,6 +16,8 @@ import org.hibernate.criterion.Restrictions;
 
 import com.projetointegrador.projeto.model.Profissional;
 import com.projetointegrador.projeto.repository.filter.ProfissionalFilter;
+import com.projetointegrador.projeto.services.NegocioException;
+import com.projetointegrador.projeto.util.JPA.Transactional;
 
 public class ProfissionalRepository implements Serializable {
 	
@@ -50,6 +53,21 @@ public class ProfissionalRepository implements Serializable {
 			criteria.add(Restrictions.ilike("celular", filtro.getCelular(), MatchMode.ANYWHERE));
 		}		
 		return criteria.addOrder(Order.asc("nome")).list();
+	}
+	
+	@Transactional
+	public void excluir(Profissional profissional) {
+		
+		try{
+			profissional = porId(profissional.getId());
+			manager.remove(profissional);
+			manager.flush();			
+		}
+		catch(PersistenceException e){
+			e.printStackTrace();
+			throw new NegocioException("Profissional não pode ser excluído.");
+		}
+		
 	}
 
 }

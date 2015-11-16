@@ -1,0 +1,84 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de Usuário</ui:define>
+	
+	<ui:define name="content">
+		<div class="Container100">
+			<div class="ContainerIndent">
+				<div class="Card ShadowEffect TexAlCenter">
+					<h:form id="frm_usuario">
+						<div class="EmptyBox20"></div>
+						<h1>Pesquisar Usuário</h1>
+						<div class="EmptyBox20"></div>
+						
+						<p:messages autoUpdate="true" closable="true"/>
+						
+						<p:toolbar style="margin-top: 20 px">
+							<p:toolbarGroup>
+								<p:commandButton value="Pesquisar" action="#{pesquisaUsuarioBean.pesquisar}" update="@form"/>						
+							</p:toolbarGroup>
+								
+							<p:toolbarGroup align="right">
+								<p:button value="Novo" outcome="/Usuario/CadastroUsuario"/>
+							</p:toolbarGroup>
+						</p:toolbar>
+						
+						<div class="EmptyBox20"></div>
+						<p:panelGrid columns="2" id="PainelPesquisa">
+						
+							<p:outputLabel value="Nome do Profissional" for="nomeProfissional"/>
+							<p:inputText id="nomeProfissional"  value="#{pesquisaUsuarioBean.filtro.nomeProfissional}"/>
+							<p:outputLabel value="Login" for="login"/>
+							<p:inputMask id="login"  value="#{pesquisaUsuarioBean.filtro.login}"/>
+											
+						</p:panelGrid>
+						
+						<p:dataTable id="tabelaUsuario" value="#{pesquisaUsuarioBean.usuariosFiltrados}" var="usuarios" style="margin-top: 20px" 
+						emptyMessage="Nenhum usuário encontrado" rows="7" paginator="true" 
+						paginatorAlwaysVisible="false" paginatorPosition="bottom"  >
+						
+							<p:column headerText="Código">
+								<h:outputText value="#{usuarios.id}"/>					
+							</p:column>
+							<p:column headerText="Login">
+								<h:outputText value="#{usuarios.login}"/>
+							</p:column>
+							<p:column headerText="Profissional">
+								<h:outputText value="#{usuarios.profissional.nome}"/>
+							</p:column>
+							<p:column headerText="Perfil">
+								<h:outputText value="#{usuarios.perfil}"/>
+							</p:column>
+								
+							<p:column headerText="Ações">
+								<p:button icon="fa fa-pencil White" title="Editar" outcome="/Usuario/CadastroUsuario">
+									<f:param name="usuario" value="#{usuarios.id}"/>
+								</p:button>
+								<p:commandButton icon="fa fa-remove White" title="Excluir" oncomplete="PF('exclusaoUsuario').show()"
+								process="@this" update=":frm_usuario:exclusaoUsuarioDialog">
+									<f:setPropertyActionListener value="#{usuarios}" target="#{pesquisaUsuarioBean.usuarioSelecionado}"></f:setPropertyActionListener>
+								</p:commandButton>
+							</p:column>
+							
+						</p:dataTable>
+						
+						<p:confirmDialog header="Exclusao de Usuário" id="exclusaoUsuarioDialog"
+						message="Tem certeza que deseja excluir este usuário: #{pesquisaUsuarioBean.usuarioSelecionado.profissional.nome}?"
+						widgetVar="exclusaoUsuario">
+							<p:commandButton value="Sim" oncomplete="PF('exclusaoUsuario').hide();" action="#{pesquisaUsuarioBean.excluir}"
+							process="@this" update=":frm_usuario:tabelaUsuario"/>
+							<p:button value="Não" onclick="PF('exclusaoUsuario').hide(); return false;"/>
+						</p:confirmDialog>
+				
+					</h:form>
+				</div>
+			</div>
+		</div>							
+	</ui:define>
+	
+</ui:composition>

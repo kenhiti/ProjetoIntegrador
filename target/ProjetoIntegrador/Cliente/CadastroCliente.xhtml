@@ -3,17 +3,23 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:o="http://omnifaces.org/ui">
 
-	<ui:define name="titulo">Cadastro de Paciente</ui:define>
+	<ui:define name="titulo">#{cadastroClienteBean.editando ? 'Edição do paciente' : 'Novo paciente'}</ui:define>
 	
 	<ui:define name="content">
 	  <div class="Container100">
             <div class="ContainerIndent">
                 <div class="Card ShadowEffect">
+                
+                	<f:metadata>
+						<o:viewParam name="cliente" value="#{cadastroClienteBean.cliente}"/>												
+					</f:metadata>
+					
 					<h:form>
 						<div class="EmptyBox20"></div>
-						<h1 class="TexAlCenter">Novo Paciente</h1>
+						<h1 class="TexAlCenter">#{cadastroClienteBean.editando ? 'Edição do paciente' : 'Novo paciente'}</h1>
 						<div class="EmptyBox20"></div>
 						<p:messages autoUpdate="true" closable="true"/>
 						
@@ -35,22 +41,22 @@
 							navigator="true" pages="1" locale="pt" value="#{cadastroClienteBean.cliente.dataNascimento}"/>
 							
 							<p:outputLabel value="Endereço" for="endereco"/>
-							<p:inputText id="endereco" size="40" maxlength="50" value="#{cadastroClienteBean.endereco.logradouro}"/>
+							<p:inputText id="endereco" size="40" maxlength="50" value="#{cadastroClienteBean.cliente.endereco.logradouro}"/>
 							<p:outputLabel value="Numero" for="numero"/>
-							<p:inputText id="numero" size="20" maxlength="10" value="#{cadastroClienteBean.endereco.numero}" />
+							<p:inputText id="numero" size="20" maxlength="10" value="#{cadastroClienteBean.cliente.endereco.numero}" />
 							
 							<p:outputLabel value="Bairro" for="bairro"/>
-							<p:inputText id="bairro" size="40" maxlength="40" value="#{cadastroClienteBean.endereco.bairro}" />
+							<p:inputText id="bairro" size="40" maxlength="40" value="#{cadastroClienteBean.cliente.endereco.bairro}" />
 							<p:outputLabel value="Cidade" for="cidade"/>
-							<p:inputText id="cidade" size="40" maxlength="40" value="#{cadastroClienteBean.endereco.cidade}"/>
+							<p:inputText id="cidade" size="40" maxlength="40" value="#{cadastroClienteBean.cliente.endereco.cidade}"/>
 							
 							<p:outputLabel value="Estado" for="estado"/>
-							<p:inputText id="estado" size="40" maxlength="20" value="#{cadastroClienteBean.endereco.uf}"/>
+							<p:inputText id="estado" size="40" maxlength="20" value="#{cadastroClienteBean.cliente.endereco.uf}"/>
 							<p:outputLabel value="CEP" for="cep"/>
-							<p:inputMask id="cep" mask="99999-999" value="#{cadastroClienteBean.endereco.cep}"/>
+							<p:inputMask id="cep" mask="99999-999" value="#{cadastroClienteBean.cliente.endereco.cep}"/>
 							
 							<p:outputLabel value="Complemento" for="complemento"/>
-							<p:inputText id="complemento" size="40" maxlength="20" value="#{cadastroClienteBean.endereco.complemento}"/>
+							<p:inputText id="complemento" size="40" maxlength="20" value="#{cadastroClienteBean.cliente.endereco.complemento}"/>
 							<p:outputLabel value="Telefone" for="telefone"/>
 							<p:inputMask id="telefone" mask="(99) 9999-9999" value="#{cadastroClienteBean.cliente.telefone}"/>
 							

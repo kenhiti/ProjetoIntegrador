@@ -11,11 +11,11 @@
             <li>
                 <a class="menulink ripplelink">
                     <i class="icon-round58 Fs40"></i>
-                    <span class="Fs18">Kenhiti Fujimoto<i class="icon-downwards Fright Fs20"></i><br /><span class="Fs12 FontRobotoLight">Analista Desenvolvedor</span></span>
+                    <span class="Fs18">#{homeBean.user}<i class="icon-downwards Fright Fs20"></i><br /><span class="Fs12 FontRobotoLight">#{homeBean.perfil}</span></span>
                 </a>
                 <ul>
                     <li><a href="#" class="menulink ripplelink"><i class="icon-planet29 Fs16"></i>Dashboard</a></li>                    
-                    <li><a href="#" class="menulink ripplelink"><i class="icon-change3 Fs16"></i> Logout</a></li>
+                    <li><a href="/ProjetoIntegrador/j_spring_security_logout" class="menulink ripplelink"><i class="icon-change3 Fs16"></i> Logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -24,14 +24,14 @@
 	        <pr:menu>	           
 	            <p:submenu id="rm_theme" label="Cadastrar" icon="icon-users">
 	                <p:menuitem id="rm_forms" value="Paciente" icon="icon-user" outcome="/Cliente/CadastroCliente"  />
-	                <p:menuitem id="rm_data" value="Usuário" icon="icon-user" outcome="/Cliente/CadastroUsuario" />
+	                <p:menuitem id="rm_data" value="Usuário" icon="icon-user" outcome="/Usuario/CadastroUsuario" />
 	                <p:menuitem id="rm_datatable" value="Profissional" icon="icon-user" outcome="/Cliente/CadastroProfissional"/>
 	            </p:submenu>
 	            
 	            <p:submenu id="rm_default" label="Pesquisar" icon="icon-search">
 	                <p:menuitem  value="Pacientes" icon="icon-user" outcome="/Cliente/PesquisaCliente"/>
 	                <p:menuitem  value="Profissionais" icon="icon-user" outcome="/Cliente/PesquisaProfissional" />
-	                <p:menuitem  value="Usuários" icon="icon-user" outcome="/Cliente/PesquisaUsuario" />
+	                <p:menuitem  value="Usuários" icon="icon-user" outcome="/Usuario/PesquisaUsuario" />
 	                <p:menuitem  value="Anamneses" icon="icon-user" outcome="/Anamnese/PesquisaAnamnese" />
 	                <p:menuitem  value="Ryodoraku" icon="icon-user" outcome="/Ryodoraku/PesquisaRyodoraku"/>
 	            </p:submenu>

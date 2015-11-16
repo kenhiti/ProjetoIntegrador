@@ -1,4 +1,4 @@
-<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+<ui:composition template="/WEB-INF/template.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -7,82 +7,84 @@
 
 	<ui:define name="titulo">Pesquisa de Profissional</ui:define>
 	
-	<ui:define name="corpo">
-		<h:form>
-		
-			<h1>Pesquisar Profissional</h1>
-			
-			<p:toolbar style="margin-top: 20 px">
-				<p:toolbarGroup>
-					<p:commandButton value="Pesquisar" action="#{pesquisaProfissionalBean.pesquisar}" update="@form"/>						
-				</p:toolbarGroup>
-					
-				<p:toolbarGroup align="right">
-					<p:button value="Novo" outcome="/Cliente/CadastroProfissional"/>
-				</p:toolbarGroup>
-			</p:toolbar>
-			
-			<p:panelGrid columns="2" id="PainelPesquisaProfissional" style="margin-top: 15px" 
-			columnClasses="rotuloPesquisa, campo">
-			
-				<p:outputLabel value="Nome" for="nomeProfissional"/>
-				<p:inputText id="nomeProfissional" size="50" value="#{pesquisaProfissionalBean.filtro.nome}" />
-				<p:outputLabel value="Telefone" for="telefoneProfissional"/>
-				<p:inputMask id="telefoneProfissional" mask="(99) 9999-9999" value="#{pesquisaProfissionalBean.filtro.telefone}"/>
-				<p:outputLabel value="Celular" for="celularProfissional"/>
-				<p:inputMask id="celularProfissional" mask="(99) 9999-9999" value="#{pesquisaProfissionalBean.filtro.celular}"/>			
-				
-			</p:panelGrid>
-			
-			<p:dataTable id="tabelaProfissional" value="#{pesquisaProfissionalBean.profissionalFiltrados}" var="profissional" style="margin-top: 20px" 
-			emptyMessage="Nenhum profissional encontrado" rows="5" paginator="true" 
-			paginatorAlwaysVisible="false" paginatorPosition="bottom">
-			
-				<p:column headerText="Código" style="text-align: center" width="40">
-					<h:outputText value="#{profissional.id}"/>
-				</p:column>
-				<p:column headerText="Nome" style="text-align: center">
-					<h:outputText value="#{profissional.nome}"/>					
-				</p:column>
-				<p:column headerText="Endereço" style="text-align: center" width="260">
-					<h:outputText value="#{profissional.endereco.logradouro}"/>
-				</p:column>
-				<p:column headerText="Num." style="text-align: center" width="40">
-					<h:outputText value="#{profissional.endereco.numero}"/>
-				</p:column>
-				<p:column headerText="Bairro" style="text-align: center" width="80">
-					<h:outputText value="#{profissional.endereco.bairro}"/>
-				</p:column>
-				<p:column headerText="Cidade" style="text-align: center" width="90">
-					<h:outputText value="#{profissional.endereco.cidade}"/>
-				</p:column>
-				<p:column headerText="UF" style="text-align: center" width="30">
-					<h:outputText value="#{profissional.endereco.uf}"/>
-				</p:column>
-				<p:column headerText="Telefone"  style="text-align: center" width="90">
-					<h:outputText value="#{profissional.telefone}"/>
-				</p:column>
-				<p:column headerText="Celular"  style="text-align: center" width="90">
-					<h:outputText value="#{profissional.celular}"/>
-				</p:column>	
+	<ui:define name="content">
+		<div class="Container100">
+			<div class="ContainerIndent">
+		    	<div class="Card ShadowEffect TexAlCenter">
+					<h:form id="frm_profissional">
+						<div class="EmptyBox20"></div>
+						<h1>Pesquisar Profissional</h1>
+						<div class="EmptyBox20"></div>
 						
-				<p:column headerText="Ações" style="text-align: center"  width="70">
-					<p:button icon="ui-icon-pencil" title="Editar"/>
-					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="exclusaoProfissional.show()"/>
-				</p:column>
-				
-			</p:dataTable>
-			
-			<p:spacer height="20px"/>
-			
-			<p:confirmDialog header="Exclusao de Profissional" message="Tem certeza que deseja excluir este profissional?"
-							widgetVar="exclusaoProfissional">
-				<p:commandButton value="Sim" oncomplete="exclusaoProfissional.hide();"/>
-				<p:button value="Não" onclick="exclusaoProfissional.hide(); return false;"/>
-			</p:confirmDialog>
-				 
-		</h:form>	
-			
+						<p:messages autoUpdate="true" closable="true"/>
+						
+						<p:toolbar style="margin-top: 20 px">
+							<p:toolbarGroup>
+								<p:commandButton value="Pesquisar" action="#{pesquisaProfissionalBean.pesquisar}" update="@form"/>						
+							</p:toolbarGroup>
+								
+							<p:toolbarGroup align="right">
+								<p:button value="Novo" outcome="/Cliente/CadastroProfissional"/>
+							</p:toolbarGroup>
+						</p:toolbar>
+						<div class="EmptyBox20"></div>
+						<p:panelGrid columns="2" id="PainelPesquisaProfissional">
+						
+							<p:outputLabel value="Nome" for="nomeProfissional"/>
+							<p:inputText id="nomeProfissional"  value="#{pesquisaProfissionalBean.filtro.nome}" />
+							<p:outputLabel value="Telefone" for="telefoneProfissional"/>
+							<p:inputMask id="telefoneProfissional" mask="(99) 9999-9999" value="#{pesquisaProfissionalBean.filtro.telefone}"/>
+							<p:outputLabel value="Celular" for="celularProfissional"/>
+							<p:inputMask id="celularProfissional" mask="(99) 9999-9999" value="#{pesquisaProfissionalBean.filtro.celular}"/>			
+							
+						</p:panelGrid>
+						
+						<p:dataTable id="tabelaProfissional" value="#{pesquisaProfissionalBean.profissionalFiltrados}" var="profissional" style="margin-top: 20px" 
+						emptyMessage="Nenhum profissional encontrado" rows="5" paginator="true" 
+						paginatorAlwaysVisible="false" paginatorPosition="bottom">
+													
+							<p:column headerText="Nome" >
+								<h:outputText value="#{profissional.nome}"/>					
+							</p:column>
+							<p:column headerText="Cidade" >
+								<h:outputText value="#{profissional.endereco.cidade}"/>
+							</p:column>
+							<p:column headerText="UF" >
+								<h:outputText value="#{profissional.endereco.uf}"/>
+							</p:column>
+							<p:column headerText="Telefone"  >
+								<h:outputText value="#{profissional.telefone}"/>
+							</p:column>
+							<p:column headerText="Celular"  >
+								<h:outputText value="#{profissional.celular}"/>
+							</p:column>	
+									
+							<p:column headerText="Ações" >
+								<p:button icon=" fa fa-pencil White" title="Editar" outcome="/Cliente/CadastroProfissional">
+									<f:param name="profissional" value="#{profissional.id}"/>
+								</p:button>
+								<p:commandButton icon="fa fa-remove White" title="Excluir" oncomplete="PF('exclusaoProfissional').show()"
+								process="@this" update=":frm_profissional:exclusaoProfissionalDialog">
+									<f:setPropertyActionListener value="#{profissional}" target="#{pesquisaProfissionalBean.profissionalSelecionado}"></f:setPropertyActionListener>
+								</p:commandButton>
+							</p:column>
+							
+						</p:dataTable>
+						
+						<p:spacer height="20px"/>
+						
+						<p:confirmDialog header="Exclusao de Profissional" id="exclusaoProfissionalDialog"
+						message="Tem certeza que deseja excluir este profissional: #{pesquisaProfissionalBean.profissionalSelecionado.nome}?"
+						widgetVar="exclusaoProfissional">
+							<p:commandButton value="Sim" oncomplete="PF('exclusaoProfissional').hide();" action="#{pesquisaProfissionalBean.excluir}"
+							process="@this" update=":frm_profissional:tabelaProfissional"/>
+							<p:button value="Não" onclick="PF('exclusaoProfissional').hide(); return false;"/>
+						</p:confirmDialog>
+							 
+					</h:form>
+				</div>
+			</div>
+		</div>		
 	</ui:define>
 	
 </ui:composition>

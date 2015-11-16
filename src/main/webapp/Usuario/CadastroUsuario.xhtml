@@ -1,0 +1,64 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">#{cadastroUsuarioBean.editando ? 'Edição do usuário' : 'Novo usuário'}</ui:define>
+	
+	<ui:define name="content">
+		<div class="Container100">
+            <div class="ContainerIndent">
+				<div class="Card ShadowEffect">
+					<f:metadata>
+						<o:viewParam name="usuario" value="#{cadastroUsuarioBean.usuario}"/>		
+						<f:event listener="#{cadastroUsuarioBean.inicializar}" type="preRenderView"/>
+					</f:metadata>
+					
+					<h:form>
+						<div class="EmptyBox20"></div>
+						<h1 class="TexAlCenter">#{cadastroUsuarioBean.editando ? 'Edição do usuário' : 'Novo usuário'}</h1>
+						<div class="EmptyBox20"></div>
+						
+						<p:messages autoUpdate="true" closable="true"/>					
+						
+						
+						<p:panelGrid columns="2" id="Painel" style="width:100%;" 
+						columnClasses="rotulo1, campo1">						
+						
+							<p:outputLabel value="Profissional" for="profissional" />
+							<p:selectOneMenu id="profissional" size="60" value="#{cadastroUsuarioBean.profissionalSelecionado}">
+								<f:selectItem itemLabel="Selecione o profissional" />
+								<f:selectItems value="#{cadastroUsuarioBean.profissionais}"
+									var="listaProfissional" itemValue="#{listaProfissional}"
+									itemLabel="#{listaProfissional.nome}" />
+							</p:selectOneMenu>
+							
+							<p:outputLabel value="Perfil" for="perfil" />
+							<p:selectOneMenu id="perfil" size="60" value="#{cadastroUsuarioBean.usuario.perfil}">
+								<f:selectItem itemLabel="Selecione o perfil" />
+								<f:selectItem itemLabel="Administrador" itemValue="ADMINISTRADOR" />
+								<f:selectItem itemLabel="Acupunturista" itemValue="ACUPUNTURISTA"/>
+								<f:selectItem itemLabel="Recepção" itemValue="RECEPCAO"/>								
+							</p:selectOneMenu>
+							
+							<p:outputLabel value="Login" for="login"/>
+							<p:inputText id="login" size="20" maxlength="40" value="#{cadastroUsuarioBean.usuario.login}" />
+							<p:outputLabel value="Senha" for="senha"/>
+							<p:password id="senha" size="20" maxlength="8" value="#{cadastroUsuarioBean.usuario.senha}"/>
+							
+							
+						</p:panelGrid>
+						
+						<div class="EmptyBox30"></div>
+						<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroUsuarioBean.salvar}" update="@form" style="float:right; width:14em;"/>
+						<div class="EmptyBox20"></div>
+					</h:form>	
+				</div>
+			</div>
+		</div>	
+	</ui:define>
+	
+</ui:composition>
